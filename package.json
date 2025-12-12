@@ -38,6 +38,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.13.0",
 		"globals": "^16.5.0",
+		"mode-watcher": "^1.1.0",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.7.1",
@@ -54,6 +55,7 @@
 	},
 	"dependencies": {
 		"@node-rs/argon2": "^2.0.2",
-		"mysql2": "^3.15.3"
+		"mysql2": "^3.15.3",
+		"svelte-sonner": "^1.0.7"
 	}
 }
