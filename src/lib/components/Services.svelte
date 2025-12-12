@@ -2,32 +2,39 @@
 	import { glass } from '$lib/global.svelte';
 
 	let services = [
-		{
-			title: 'Cleaning',
-			description:
-				'Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh',
-			btnNum: '200+',
-			butStr: 'Employees',
-			image: '/images/service1.webp'
-		},
+	{
+		title: 'Cleaning',
+		description: `We provide professional cleaning solutions for homes, offices, and commercial spaces. From one-time cleanups to full janitorial services, we ensure spotless results using modern equipment and safe, effective products.`,
+		btnNum: '200+',
+		butStr: 'Employees',
+		image: '/images/service1.webp'
+	},
 
-		{
-			title: 'Security',
-			description:
-				'Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh',
-			btnNum: '150+',
-			butStr: 'Employees',
-			image: '/images/service2.webp'
-		},
-		{
-			title: 'Property Management',
-			description:
-				'Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh Lorem ipsum dolor sit amet, consectetuer elit, sed diam nonummy nibh',
-			btnNum: '50+',
-			butStr: 'Employees',
-			image: '/images/service2.webp'
-		}
-	];
+	{
+		title: 'Security',
+		description: `We offer trained and reliable security personnel, customized to your schedule and specific protection needs.`,
+		btnNum: '150+',
+		butStr: 'Employees',
+		image: '/images/service2.webp'
+	},
+
+	{
+		title: 'Training and Consultancy Service',
+		description: `We provide janitorial training, cleaning consultancy, and operational monitoring to help organizations improve efficiency and maintain high cleanliness standards.`,
+		btnNum: '150+',
+		butStr: 'Employees',
+		image: '/images/service2.webp'
+	},
+
+	{
+		title: 'Property Management',
+		description: `We supply quality cleaning materials and sanitary products to help maintain safe, hygienic spaces. Our service ensures reliable support, fair pricing, and care for your property and people.`,
+		btnNum: '50+',
+		butStr: 'Employees',
+		image: '/images/service2.webp'
+	}
+];
+
 
 	let list = [
 		{ src: '/images/teams.svg', name: 'Experienced Team' },
@@ -38,9 +45,9 @@
 </script>
 
 <section class="grid lg:grid-cols-4 grid-cols-1 gap-4 w-9/10 justify-self-center mt-16">
-	{#each services as { title, description, btnNum, butStr, image }, index}
+	{#each services as { title, description, btnNum, butStr, image }}
 		<div
-			class="roudned-xl {index === 0 ? 'lg:col-span-2 col-span-1' : ''} rounded-4xl
+			class="roudned-xl rounded-4xl
      bg-cover bg-center flex flex-col justify-between items-start p-8"
 			style:background-image="url('{image}')"
 		>
@@ -78,4 +85,20 @@
 			</div>
 		{/each}
 	</div>
+</section>
+
+
+<section class="grid lg:grid-cols-2 grid-cols-1 gap-16 lg:px-[7%] py-24">
+
+	<div class="flex flex-col items-start justify-center gap-8">
+		<h2 class="text-background font-bold!">Cleaning</h2>
+		<p>
+			At Spotless General Trading, we specialize in delivering professional cleaning solutions that keep your spaces spotless, comfortable, and ready for use. From quick one-time cleanups to full-scale janitorial management, our services are designed to meet every need with reliability, efficiency, and care. Backed by advanced cleaning equipment and quality-tested products, we ensure every surface shines — while maintaining the safety and integrity of your environment.
+		</p>
+	</div>
+
+	<div>
+		 <img src="/images/mop.webp" alt="Cleaning Mop and bucket" />
+	</div>
+	 
 </section>

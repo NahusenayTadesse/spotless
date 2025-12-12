@@ -1,5 +1,6 @@
 <script>
 	import TopHero from '$lib/components/TopHero.svelte';
+	import { Button } from '$lib/components/ui/button/index';
 	import { glass } from '$lib/global.svelte';
 	import { Facebook, Instagram, Mail, Phone } from '@lucide/svelte';
 
@@ -13,10 +14,13 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Contact Us | Spotless</title>
+</svelte:head>
 <TopHero title="Contact Us" bread="Spotless > contact" />
 
 <section
-	class="mt-8 w-4/5 justify-self-center grid lg:grid-cols-2 grid-cols-1 gap-8 justify-center items-center"
+	class="mt-8  justify-self-center grid lg:grid-cols-2 grid-cols-1 gap-8 justify-center items-center"
 >
 	<form action="" class="flex flex-col gap-4 w-md">
 		<input
@@ -54,6 +58,10 @@
 			class="border-2 border-background
              rounded-xl placeholder:text-background placeholder:font-bold p-3"
 		></textarea>
+
+		<Button>
+			 Send Message
+		</Button>
 	</form>
 	<div class=" bg-white/40 rounded-lg flex flex-col gap-4 justify-center items-center">
 		<h2 class="text-extrabold text-background text-5xl!">Contacts Us</h2>

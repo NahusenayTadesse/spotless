@@ -34,12 +34,12 @@
 	];
 </script>
 
-<Carousel.Root class="w-[90%] mt-16 px-[7%] flex flex-col justify-center items-end">
+<Carousel.Root class="w-[90%] my-16 px-[7%] flex flex-col justify-center items-end">
 	<Carousel.Content class="mt-16 ">
 		{#each testimonials as { image, name, title, description }}
 			<Carousel.Item class="lg:basis-1/3">
 				<div
-					class="relative shadow-lg p-4 flex flex-col gap-4 justify-end items-start rounded-3xl shadow-background/10"
+					class="relative shadow-2xl p-4 flex flex-col gap-4 justify-end items-start rounded-3xl"
 				>
 					<img src={image} alt={name} class="absolute left-3 -top-8" />
 

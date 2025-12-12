@@ -7,6 +7,18 @@
 	import { ArrowRight } from '@lucide/svelte';
 </script>
 
+<svelte:head>
+	<title>Spotless General Trading P.L.C.</title>
+	<meta
+		name="description"
+		content="Spotless General Trading P.L.C. offers a full range of trading, property,
+	and facility management services."
+	/>
+	<meta
+		name="keywords"
+		content="Spotless, General Trading, Ethiopia, Trading, Property, Facility Management, Services"
+	/>
+</svelte:head>
 <Hero />
 <section
 	class="mt-16 grid h-full lg:grid-cols-2 grid-cols-1 w-9/10 gap-8 justify-self-center items-center"

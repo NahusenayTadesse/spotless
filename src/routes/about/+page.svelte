@@ -1,14 +1,18 @@
 <script>
-	import { btn } from '$lib/global.svelte';
+	import { btn, glass } from '$lib/global.svelte';
 	import { ArrowRight } from '@lucide/svelte';
 	import TopHero from '$lib/components/TopHero.svelte';
+	import Counter from '$lib/components/Counter.svelte';
+	import Team from '$lib/components/Team.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import { fade, fly } from 'svelte/transition';
 
-	let list = [
-		{ src: '/images/teams.svg', name: '62+', small: 'Customers' },
-		{ src: '/images/teams.svg', name: '15+', small: 'Team Members' },
-		{ src: '/images/teams.svg', name: '300+', small: 'Current Employees' },
-		{ src: '/images/teams.svg', name: '15+', small: 'Years of Experience' }
-	];
+	let list = $state([
+		{ src: '/images/teams.svg', name: 62, small: 'Customers' },
+		{ src: '/images/teams.svg', name: 15, small: 'Team Members' },
+		{ src: '/images/teams.svg', name: 300, small: 'Current Employees' },
+		{ src: '/images/teams.svg', name: 15, small: 'Years of Experience' }
+	]);
 
 	let values = [
 		{
@@ -33,7 +37,17 @@
 			description: 'We continuously seek better ways to serve, manage, and deliver.'
 		}
 	];
+
+	let mission = $state(true);
+
+	function onclick(){
+		 mission = !mission
+	}
 </script>
+
+<svelte:head>
+	<title>About Us | Spotless</title>
+</svelte:head>
 
 <TopHero title="About Us" bread="Spotless > about us" />
 
@@ -62,16 +76,22 @@
 
 <section class="flex flex-col mt-16 pt-8 gap-8 justify-center items-center">
 	<div
-		class="grid lg:grid-cols-4 grid-cols-2 bg-background w-9/10 justify-self-center text-center rounded-[48px] py-6"
+		class="grid lg:grid-cols-4 grid-cols-2 gap-2 bg-background w-9/10 justify-self-center text-center rounded-[48px] py-6"
 	>
 		{#each list as { src, name, small }}
 			<div
 				class=" flex flex-row gap-4 justify-center
           items-center py-4 p-4"
 			>
-				<img {src} alt={name} class="w-36 h-36" />
+				<img {src} alt={String(name)} class="w-24 h-24 bg-white/30 p-2 rounded-full" />
 				<div>
-					<h2 class="text-white text-extrabold">{name}</h2>
+					<h2 class="text-white text-extrabold">
+						<Counter value={name}
+							duration={1000}
+							format={(num) => {
+								
+								return Math.floor(num).toLocaleString();
+							}} />+</h2>
 					<p class="text-white">{small}</p>
 				</div>
 			</div>
@@ -84,15 +104,20 @@
 		<h4 class="text-background">
 			Our main goal is to satisfy clients and provide quality through excellence and supervision
 		</h4>
-		<div class="flex flex-row gap-4 justify-center items-center">
-			<button class="{btn} bg-background! text-white!"> Our Mission </button>
-
-			<button class={btn}> Our Vision </button>
+		<div class="flex flex-row gap-4 justify-start items-center">
+			<Button  variant={mission ? 'default' : 'outline' } {onclick}> Our Mission </Button>
+			<Button  variant={mission ? 'outline' : 'default' } {onclick}> Our Vision </Button>
 		</div>
-		<p>
+		{#if mission}
+		<p transition:fly={{y:-200, duration: 500}} class="w-full lg:w-124 transition-all duration-300 ease-in-out">
 			Our priority is to make our customers satisfied with our services by doing work focused on the
 			needs of our customers.
 		</p>
+		{:else}
+		<p transition:fly={{y:-200, duration: 500}} class="w-full lg:w-124	transition-call duration-300 ease-in-out">
+			To be the most trusted and innovative service provider in our industry, recognized for consistently exceeding customer expectations and setting new standards of quality, reliability, and customer-focused solutions.
+		</p>
+		{/if}
 	</div>
 
 	<img src="/images/about2.webp" alt="" />
@@ -132,3 +157,6 @@
 		<span class="font-bold! italic!"> — Kasech Ademasu, General Manager </span>
 	</div>
 </section>
+
+<Team />
+

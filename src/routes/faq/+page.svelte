@@ -57,6 +57,9 @@
 	];
 </script>
 
+<svelte:head>
+	<title>FAQ | Spotless</title>
+</svelte:head>
 <TopHero title="Frequently Asked Questions" bread="Spotless > FAQs" />
 
 <Accordion.Root

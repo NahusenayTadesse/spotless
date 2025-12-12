@@ -3,7 +3,7 @@
 	import { glass } from '$lib/global.svelte';
 	import { TextAlignJustify, X } from '@lucide/svelte';
 	import { slide } from 'svelte/transition';
-	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
 
 	let menu = [
 		{ name: 'Home', href: '/' },
@@ -46,27 +46,29 @@
 		visible = true;
 	});
 
-	let style = `hover:bg-white/30! border hover:scale-110 transform transition ease-in-out duration-300 bg-transparent p-2 rounded-[48px]
+	let style = `hover:bg-white/30! border hover:scale-110 transform transition ease-in-out duration-300 p-2 rounded-[48px]
                  flex flex-col justify-center items-center text-white`;
 </script>
 
 <nav class="p-12 hidden lg:block absolute top-6 z-50 w-full">
 	<div class="flex flex-row gap-8 justify-around items-center">
-		<div class="flex flex-row gap-4">
+		<div class="flex flex-row gap-4 items-center">
 			<img src="/logomain.svg" alt="Logo" />
 
-			<ul class="grid grid-cols-5 gap-0">
+			<ul class="grid grid-cols-5 gap-2 self-center">
 				{#each menu as { name, href } (href)}
-					<li class="{glass} {style}">
+					<li
+						class="{glass} {page.url.pathname === href ? 'bg-white/30' : 'bg-transparent'} {style}"
+					>
 						<a {href}>{name}</a>
 					</li>
-				{/each}}
+				{/each}
 			</ul>
 		</div>
 
-		<ul class="grid grid-cols-2 gap-0">
+		<ul class="grid grid-cols-2 gap-2">
 			{#each faq as { name, href } (href)}
-				<li class="{glass} {style}">
+				<li class="{glass} {page.url.pathname === href ? 'bg-white/30' : 'bg-transparent'} {style}">
 					<a {href}>{name}</a>
 				</li>
 			{/each}
@@ -79,7 +81,7 @@
 		? 'backdrop-blur-lg bg-white/30'
 		: 'bg-transparent'} space-x-4"
 >
-	<a href={resolve('/')}>
+	<a href="/">
 		<img
 			src={scrolled ? '/logomain.svg' : '/logomain.svg'}
 			alt="Spotless Logo"
