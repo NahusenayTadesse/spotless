@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
-	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
-	import { Badge } from "$lib/components/ui/badge";
-	import { Button } from "$lib/components/ui/button";
-	import { MailIcon, TrashIcon } from "@lucide/svelte";
-	import { toast } from "svelte-sonner";
-    
-    let { data } = $props()
+	import { fade } from 'svelte/transition';
+	import { Card, CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
+	import { Button } from '$lib/components/ui/button';
+	import { MailIcon, TrashIcon, X } from '@lucide/svelte';
+	import { toast } from 'svelte-sonner';
+	import { enhance } from '$app/forms';
+	import DialogComp from '$lib/components/DialogComp.svelte';
+	import * as Dialog from '$lib/components/ui/dialog/index.js';
+
+	let { data } = $props();
 
 	let messages = $derived(data.messages);
 	let selectedMessage: (typeof messages)[0] | null = $state(null);
@@ -14,13 +16,17 @@
 	const deleteMessage = (id: number) => {
 		messages = messages.filter((m) => m.id !== id);
 		selectedMessage = null;
-		toast.success("Message deleted successfully");
+		toast.success('Message deleted successfully');
 	};
 
 	const markAsRead = (id: number) => {
-		messages = messages.map((m) => (m.id === id ? { ...m, status: "Read" } : m));
+		messages = messages.map((m) => (m.id === id ? { ...m, status: 'Read' } : m));
 	};
 </script>
+
+<svelte:head>
+	<title>Messages</title>
+</svelte:head>
 
 <div class="flex flex-col gap-6">
 	<div class="flex flex-col gap-2">
@@ -39,7 +45,12 @@
 						markAsRead(message.id);
 					}}
 				>
-					<Card class={["transition-all duration-300 hover:shadow-lg", selectedMessage?.id === message.id && "ring-2 ring-primary"]}>
+					<Card
+						class={[
+							'transition-all duration-300 hover:shadow-lg',
+							selectedMessage?.id === message.id && 'ring-2 ring-primary'
+						]}
+					>
 						<CardContent class="pt-6">
 							<div class="flex items-start justify-between gap-4">
 								<div class="flex-1 min-w-0">
@@ -57,21 +68,26 @@
 									<p class="text-sm text-muted-foreground line-clamp-2">{message.message}</p>
 									<p class="text-xs text-muted-foreground mt-2">{message.date}</p>
 								</div>
-                                <form action="/?delete">
-                                    <input type="hidden" value={message.id}>
-								<Button
-									size="icon"
-									variant="ghost"
-									class="size-8 shrink-0"
-									onclick={(e) => {
-										e.stopPropagation();
-										deleteMessage(message.id);
-									}}
-								>
-									<TrashIcon size={16} />
-
-								</Button>
-                                </form>
+								<DialogComp title="Delete Message" variant="destructive">
+									<form
+										action="?/delete"
+										method="POST"
+										class="flex flex-row justify-between"
+										use:enhance
+									>
+										<input type="hidden" name="id" value={message.id} />
+										<Button size="sm" variant="destructive" class="border-0" type="submit">
+											<TrashIcon />
+											Delete
+										</Button>
+										<Dialog.Close type="button">
+											<Button type="button">
+												Close
+												<X />
+											</Button>
+										</Dialog.Close>
+									</form>
+								</DialogComp>
 							</div>
 						</CardContent>
 					</Card>
@@ -95,7 +111,7 @@
 							<p class="text-xs font-semibold text-muted-foreground uppercase">Subject</p>
 							<p class="font-medium">{selectedMessage.subject}</p>
 						</div>
-					
+
 						<div>
 							<p class="text-xs font-semibold text-muted-foreground uppercase">Date</p>
 							<p class="text-sm">{selectedMessage.date}</p>
@@ -105,11 +121,20 @@
 							<p class="text-sm leading-relaxed">{selectedMessage.message}</p>
 						</div>
 						<div class="flex gap-2 pt-4 border-t">
-							<Button class="flex-1" size="sm">
+							<Button
+								class="flex-1"
+								size="sm"
+								href="mailto:{selectedMessage.email}"
+								target="_blank"
+							>
 								<MailIcon size={16} />
 								Reply
 							</Button>
-							<Button variant="outline" size="sm" onclick={() => deleteMessage(selectedMessage!.id)}>
+							<Button
+								variant="outline"
+								size="sm"
+								onclick={() => deleteMessage(selectedMessage!.id)}
+							>
 								<TrashIcon size={16} />
 							</Button>
 						</div>

@@ -2,7 +2,11 @@
 	import TopHero from '$lib/components/TopHero.svelte';
 	import { Button } from '$lib/components/ui/button/index';
 	import { glass } from '$lib/global.svelte';
-	import { Facebook, Instagram, Mail, Phone } from '@lucide/svelte';
+	import { Facebook, Instagram, Mail, Phone, Plus, Loader } from '@lucide/svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import { zod4Client } from 'sveltekit-superforms/adapters';
+	import { schema } from './schema';
+	import Errors from '$lib/components/Errors.svelte';
 
 	let Telegram = '/images/Telegram.svg';
 
@@ -12,56 +16,94 @@
 		{ icon: Facebook, contact: 'Facebook' },
 		{ icon: Instagram, contact: 'Instagram' }
 	];
+   
+     let { data } = $props()
+
+	 
+		const { form, errors, enhance, delayed, restore, allErrors } = superForm(data.form, {
+
+
+		validators: zod4Client(schema)
+	});
+
+
 </script>
 
 <svelte:head>
 	<title>Contact Us | Spotless</title>
 </svelte:head>
+{#snippet fe(
+	label = '',
+	name = '',
+	type = '',
+	placeholder = '',
+	required = false,
+	min = '', 
+
+	max = '',
+    
+)}
+	<div class="flex w-full flex-col justify-start gap-2">
+		<input
+			{type}
+			{name}
+			{placeholder}
+			{required}
+			{min}
+			{max}
+			bind:value={$form[name]}
+				class="border-2 border-background
+             rounded-[45px] placeholder:text-background placeholder:font-bold p-3"
+			aria-invalid={$errors[name] ? 'true' : undefined}
+		/>
+		{#if $errors[name]}
+			<span class="text-red-500">{$errors[name]}</span>
+		{/if}
+	</div>
+{/snippet}
 <TopHero title="Contact Us" bread="Spotless > contact" />
+
 
 <section
 	class="mt-8  justify-self-center grid lg:grid-cols-2 grid-cols-1 gap-8 justify-center items-center"
 >
-	<form action="" class="flex flex-col gap-4 w-md">
-		<input
-			type="text"
-			name=""
-			id=""
-			placeholder="Your Name"
-			class="border-2 border-background
-             rounded-[45px] placeholder:text-background placeholder:font-bold p-3"
-		/>
+	<form action="?/addMessage" id="main" class="flex flex-col gap-4 w-md">
+         <Errors allErrors={$allErrors} />
 
-		<input
-			type="email"
-			name=""
-			id=""
-			placeholder="Email Address"
-			class="border-2 border-background
-             rounded-[45px] placeholder:text-background placeholder:font-bold p-3"
-		/>
+		{@render fe('Your Name', 'name', 'text', 'Your Name', true)}
+		{@render fe('Your Name', 'phone', 'tel', '+251 XXXXXXXX', true)}
+		{@render fe('Your Name', 'email', 'email', 'Your Email', true)}
+		{@render fe('Your Name', 'subject', 'text', 'Subject', true)}
 
-		<input
-			type="text"
-			name=""
-			id=""
-			placeholder="Subject"
-			class="border-2 border-background
-             rounded-[45px] placeholder:text-background placeholder:font-bold p-3"
-		/>
+	
+
+	
 
 		<textarea
-			name=""
+			name="message"
 			rows="6"
+			
 			id=""
+			bind:value={$form.message}
+			aria-invalid={$errors.message ? 'true' : undefined}
 			placeholder="Write Message"
 			class="border-2 border-background
              rounded-xl placeholder:text-background placeholder:font-bold p-3"
 		></textarea>
+		{#if $errors.message}
+			<span class="text-red-500">{$errors.message}</span>
+		{/if}
+		
 
-		<Button>
-			 Send Message
-		</Button>
+		<Button type="submit" class="mt-4" form="main">
+				{#if $delayed}
+					<Loader class="animate-spin" />
+					Sending Message
+				{:else}
+					<Plus class="h-4 w-4" />
+					Send Message
+				{/if}
+			</Button>
 	</form>
 	<div class=" bg-white/40 rounded-lg flex flex-col gap-4 justify-center items-center">
 		<h2 class="text-extrabold text-background text-5xl!">Contacts Us</h2>

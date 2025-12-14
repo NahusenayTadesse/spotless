@@ -11,3 +11,11 @@ export const btn = `w-fit opacity-100 rounded-2xl gap-[10px] opacity-100 rounded
  py-4 px-16 border-2 border-background text-2xl text-background font-extralight font-body
   hover:bg-background hover:text-white hover:scale-110 transform transition ease-in-out duration-300
  `;
+    import { encodeBase32LowerCase } from '@oslojs/encoding';
+
+  export function generateUserId() {
+      // ID with 120 bits of entropy, or about the same as UUID v4.
+      const bytes = crypto.getRandomValues(new Uint8Array(15));
+      const id = encodeBase32LowerCase(bytes);
+      return id;
+  }
