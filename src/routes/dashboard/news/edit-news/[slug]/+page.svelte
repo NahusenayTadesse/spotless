@@ -128,8 +128,8 @@
 		<Button type="submit" variant="destructive" size="sm" class="border-0">
 			<Trash /> Delete {data.blog.title}
 		</Button>
-		<Dialog.Close>
-			<Button size="sm" class="border-0"><X />Close</Button>
+		<Dialog.Close type="button">
+			<Button type="button" size="sm" class="border-0"><X />Close</Button>
 		</Dialog.Close>
 	</form>
 </DialogComp>
