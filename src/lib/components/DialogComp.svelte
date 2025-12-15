@@ -1,13 +1,19 @@
 <script lang="ts">
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import { Button, type ButtonVariant } from '$lib/components/ui/button/index.js';
+	import { Trash } from '@lucide/svelte';
 
 	let { title, children, variant }: { title: string; variant: ButtonVariant } = $props();
 </script>
 
 <Dialog.Root>
 	<Dialog.Trigger class="w-auto px-4 border-0"
-		><Button {variant} class="border-0">{title}</Button></Dialog.Trigger
+		><Button {variant} size="sm" class="border-0">
+			{#if variant === 'destructive'}
+				<Trash />
+			{/if}
+			{title}
+		</Button></Dialog.Trigger
 	>
 	<Dialog.Content class="w-full bg-white">
 		<Dialog.Header>

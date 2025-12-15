@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { Card, CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import { MailIcon, TrashIcon, X } from '@lucide/svelte';
@@ -23,6 +23,24 @@
 		messages = messages.map((m) => (m.id === id ? { ...m, status: 'Read' } : m));
 	};
 </script>
+
+{#snippet deleteForm(title = 'Delete  Message')}
+	<DialogComp {title} variant="destructive">
+		<form action="?/delete" method="POST" class="flex flex-row justify-between" use:enhance>
+			<input type="hidden" name="id" value={message.id} />
+			<Button size="sm" variant="destructive" class="border-0" type="submit">
+				<TrashIcon />
+				Delete
+			</Button>
+			<Dialog.Close type="button">
+				<Button type="button">
+					Close
+					<X />
+				</Button>
+			</Dialog.Close>
+		</form>
+	</DialogComp>
+{/snippet}
 
 <svelte:head>
 	<title>Messages</title>
@@ -96,8 +114,8 @@
 		</div>
 
 		{#if selectedMessage}
-			<div in:fade={{ duration: 300 }}>
-				<Card class="sticky top-4 h-fit">
+			<div transition:fade={{ duration: 300 }}>
+				<Card class="fixed z-100 top-4 h-fit">
 					<CardHeader>
 						<CardTitle class="text-lg">Message Details</CardTitle>
 					</CardHeader>
@@ -130,13 +148,28 @@
 								<MailIcon size={16} />
 								Reply
 							</Button>
-							<Button
-								variant="outline"
-								size="sm"
-								onclick={() => deleteMessage(selectedMessage!.id)}
-							>
-								<TrashIcon size={16} />
-							</Button>
+							<DialogComp title="" variant="destructive">
+								<Dialog.Title>Delete Message</Dialog.Title>
+								Are you sure you want to delete this message?
+								<form
+									action="?/delete"
+									method="POST"
+									class="flex flex-row justify-between"
+									use:enhance
+								>
+									<input type="hidden" name="id" value={selectedMessage.id} />
+									<Button size="sm" variant="destructive" class="border-0" type="submit">
+										<TrashIcon />
+										Delete
+									</Button>
+									<Dialog.Close type="button">
+										<Button type="button">
+											Close
+											<X />
+										</Button>
+									</Dialog.Close>
+								</form>
+							</DialogComp>
 						</div>
 					</CardContent>
 				</Card>
