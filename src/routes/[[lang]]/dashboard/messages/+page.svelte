@@ -7,8 +7,11 @@
 	import { enhance } from '$app/forms';
 	import DialogComp from '$lib/components/DialogComp.svelte';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import { page } from '$app/state';
 
 	let { data } = $props();
+
+	let param = page.params;
 
 	let messages = $derived(data.messages);
 	let selectedMessage: (typeof messages)[0] | null = $state(null);

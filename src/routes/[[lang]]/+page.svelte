@@ -5,6 +5,10 @@
 	import Testimonials from '$lib/components/Testimonials.svelte';
 	import { btn } from '$lib/global.svelte';
 	import { ArrowRight } from '@lucide/svelte';
+	import { page } from '$app/state';
+
+    let { data } = $props()
+
 </script>
 
 <svelte:head>

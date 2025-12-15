@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { glass } from '$lib/global.svelte';
-	import { TextAlignJustify, X } from '@lucide/svelte';
-	import { slide } from 'svelte/transition';
+	import { TextAlignJustify, X, Languages } from '@lucide/svelte';
+	import { fly, slide } from 'svelte/transition';
 	import { page } from '$app/state';
 
 	let menu = [
@@ -48,6 +48,38 @@
 
 	let style = `hover:bg-white/30! border hover:scale-110 transform transition ease-in-out duration-300 p-2 rounded-[48px]
                  flex flex-col justify-center items-center text-white`;
+
+  import { goto, invalidate } from '$app/navigation';
+	import Button from './ui/button/button.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+
+
+
+  let currentLang = $state(page.params.lang);
+  const langs = ['en', 'am'];
+
+  function switchLang(newLang: string) {
+    if (newLang === currentLang) return;
+
+    const pathname = page.url.pathname;
+    const cleanPath = pathname.replace(
+      new RegExp(`^/(${langs.join('|')})(/|$)`),
+      '/'
+    );
+
+    goto(`/${newLang}${cleanPath === '/' ? '' : cleanPath}`, {
+      invalidateAll: true
+    });
+  }
+
+
+    $effect(() => {
+      currentLang = page.params.lang;
+    });
+
+
+    let langDrop = $state(false)
+
 </script>
 
 <nav class="p-12 hidden lg:block absolute top-6 z-50 w-full">
@@ -65,14 +97,37 @@
 				{/each}
 			</ul>
 		</div>
-
-		<ul class="grid grid-cols-2 gap-2">
-			{#each faq as { name, href } (href)}
-				<li class="{glass} {page.url.pathname === href ? 'bg-white/30' : 'bg-transparent'} {style}">
-					<a {href}>{name}</a>
-				</li>
-			{/each}
-		</ul>
+		<div class="flex flex-col gap-2">
+			<ul class="grid grid-cols-3 gap-2">
+				{#each faq as { name, href } (href)}
+					<li
+						class="{glass} {page.url.pathname === href ? 'bg-white/30' : 'bg-transparent'}  {style}"
+					>
+						<a {href}>{name}</a>
+					</li>
+				{/each}
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						<Button size="icon" variant="outline" class="bg-white/60 text-black relative">
+							<Languages />
+						</Button>
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						{#each langs as l}
+							<DropdownMenu.Item>
+								<button
+									class:active={l === currentLang}
+									class="bg-white/60 text-black"
+									onclick={() => switchLang(l)}
+								>
+									{l.toUpperCase()}
+								</button>
+							</DropdownMenu.Item>
+						{/each}
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
+			</ul>
+		</div>
 	</div>
 </nav>
 
