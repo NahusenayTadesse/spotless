@@ -107,17 +107,19 @@
 					</li>
 				{/each}
 				<DropdownMenu.Root>
-					<DropdownMenu.Trigger>
-						<Button size="icon" variant="outline" class="bg-white/60 text-black relative">
-							<Languages />
-						</Button>
+					<DropdownMenu.Trigger
+						class="bg-white/60 text-black rounded-full p-2 flex justify-center items-center w-10 h-10"
+					>
+						<Languages class="" />
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content>
 						{#each langs as l}
 							<DropdownMenu.Item>
 								<button
 									class:active={l === currentLang}
-									class="bg-white/60 text-black"
+									class="{l === page.params.lang
+										? 'bg-black text-white'
+										: 'bg-white/60 text-black'} w-full"
 									onclick={() => switchLang(l)}
 								>
 									{l.toUpperCase()}
