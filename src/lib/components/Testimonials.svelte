@@ -34,14 +34,19 @@
 	];
 </script>
 
-<Carousel.Root class="w-[90%] my-16 px-[7%] flex flex-col justify-center items-end">
-	<Carousel.Content class="mt-16 ">
+<Carousel.Root
+	opts={{
+		align: 'center'
+	}}
+	class=" lg:w-[90%] relative w-7/10 my-16 px-[7%] flex flex-col justify-self-center"
+>
+	<Carousel.Content class="mt-16">
 		{#each testimonials as { image, name, title, description }}
-			<Carousel.Item class="lg:basis-1/3">
+			<Carousel.Item class="md:basis-1/2 lg:basis-1/3">
 				<div
-					class="relative shadow-2xl p-4 flex flex-col gap-4 justify-end items-start rounded-3xl"
+					class="relative shadow-sm lg:p-4 p-0 flex flex-col gap-4 justify-end items-start rounded-3xl"
 				>
-					<img src={image} alt={name} class="absolute left-3 -top-8" />
+					<img src={image} alt={name} class="absolute lg:left-3 left-0 -top-8" />
 
 					<p class="mt-24">{description}</p>
 
@@ -56,6 +61,6 @@
 		{/each}
 	</Carousel.Content>
 
-	<Carousel.Previous class={glass} />
-	<Carousel.Next class={glass} />
+	<Carousel.Previous />
+	<Carousel.Next />
 </Carousel.Root>

@@ -118,7 +118,7 @@
 
 		{#if selectedMessage}
 			<div transition:fade={{ duration: 300 }}>
-				<Card class="fixed z-100 top-4 h-fit">
+				<Card class="fixed z-100 top-16 h-fit">
 					<CardHeader>
 						<CardTitle class="text-lg">Message Details</CardTitle>
 					</CardHeader>

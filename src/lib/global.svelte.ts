@@ -19,3 +19,7 @@ export const btn = `w-fit opacity-100 rounded-2xl gap-[10px] opacity-100 rounded
       const id = encodeBase32LowerCase(bytes);
       return id;
   }
+  export function isMobile() {
+    if (typeof window === 'undefined') return false; // SSR guard
+    return window.innerWidth <= 768;
+  }

@@ -61,89 +61,89 @@
 	<title>FAQ | Spotless</title>
 </svelte:head>
 <TopHero title="Frequently Asked Questions" bread="Spotless > FAQs" />
+<div class="lg:p-0 px-6">
+	<Accordion.Root
+		type="single"
+		class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
+		value="item-1"
+	>
+		<h3 class="text-background text-bold">General Company Questions</h3>
+		{#each general as { q, a }, i}
+			<Accordion.Item
+				value="item-{i + 1}"
+				class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
+			>
+				<Accordion.Trigger>{q}</Accordion.Trigger>
+				<Accordion.Content class="flex flex-col gap-4 text-balance">
+					<p>
+						{a}
+					</p>
+				</Accordion.Content>
+			</Accordion.Item>
+		{/each}
+	</Accordion.Root>
 
-<Accordion.Root
-	type="single"
-	class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
-	value="item-1"
->
-	<h3 class="text-background text-bold">General Company Questions</h3>
-	{#each general as { q, a }, i}
-		<Accordion.Item
-			value="item-{i + 1}"
-			class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
-		>
-			<Accordion.Trigger>{q}</Accordion.Trigger>
-			<Accordion.Content class="flex flex-col gap-4 text-balance">
-				<p>
-					{a}
-				</p>
-			</Accordion.Content>
-		</Accordion.Item>
-	{/each}
-</Accordion.Root>
+	<Accordion.Root
+		type="single"
+		class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
+		value="item-2"
+	>
+		<h3 class="text-background text-bold">Service-Related Questions</h3>
+		{#each service as { q, a }, i}
+			<Accordion.Item
+				value="item-{i + 1}"
+				class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
+			>
+				<Accordion.Trigger>{q}</Accordion.Trigger>
+				<Accordion.Content class="flex flex-col gap-4 text-balance">
+					<p>
+						{a}
+					</p>
+				</Accordion.Content>
+			</Accordion.Item>
+		{/each}
+	</Accordion.Root>
 
-<Accordion.Root
-	type="single"
-	class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
-	value="item-2"
->
-	<h3 class="text-background text-bold">Service-Related Questions</h3>
-	{#each service as { q, a }, i}
-		<Accordion.Item
-			value="item-{i + 1}"
-			class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
-		>
-			<Accordion.Trigger>{q}</Accordion.Trigger>
-			<Accordion.Content class="flex flex-col gap-4 text-balance">
-				<p>
-					{a}
-				</p>
-			</Accordion.Content>
-		</Accordion.Item>
-	{/each}
-</Accordion.Root>
+	<Accordion.Root
+		type="single"
+		class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
+		value="item-3"
+	>
+		<h3 class="text-background text-bold">Communication & Logistics</h3>
+		{#each com as { q, a }, i}
+			<Accordion.Item
+				value="item-{i + 1}"
+				class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
+			>
+				<Accordion.Trigger>{q}</Accordion.Trigger>
+				<Accordion.Content class="flex flex-col gap-4 text-balance">
+					<p>
+						{a}
+					</p>
+				</Accordion.Content>
+			</Accordion.Item>
+		{/each}
+	</Accordion.Root>
 
-<Accordion.Root
-	type="single"
-	class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
-	value="item-3"
->
-	<h3 class="text-background text-bold">Communication & Logistics</h3>
-	{#each com as { q, a }, i}
-		<Accordion.Item
-			value="item-{i + 1}"
-			class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
-		>
-			<Accordion.Trigger>{q}</Accordion.Trigger>
-			<Accordion.Content class="flex flex-col gap-4 text-balance">
-				<p>
-					{a}
-				</p>
-			</Accordion.Content>
-		</Accordion.Item>
-	{/each}
-</Accordion.Root>
-
-<Accordion.Root
-	type="single"
-	class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
-	value="item-4"
->
-	<h3 class="text-background text-bold">Technical & Website Questions</h3>
-	{#each tech as { q, a }, i}
-		<Accordion.Item
-			value="item-{i + 1}"
-			class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
-		>
-			<Accordion.Trigger>{q}</Accordion.Trigger>
-			<Accordion.Content class="flex flex-col gap-4 text-balance">
-				<p>
-					{a}
-				</p>
-			</Accordion.Content>
-		</Accordion.Item>
-	{/each}
-</Accordion.Root>
-
+	<Accordion.Root
+		type="single"
+		class="mt-16 w-full gap-2 sm:max-w-[80%] justify-self-center"
+		value="item-4"
+	>
+		<h3 class="text-background text-bold">Technical & Website Questions</h3>
+		{#each tech as { q, a }, i}
+			<Accordion.Item
+				value="item-{i + 1}"
+				class="px-4 mt-4 items-center shadow-lg justify-center border rounded-[45px]"
+			>
+				<Accordion.Trigger>{q}</Accordion.Trigger>
+				<Accordion.Content class="flex flex-col gap-4 text-balance">
+					<p>
+						{a}
+					</p>
+				</Accordion.Content>
+			</Accordion.Item>
+		{/each}
+	</Accordion.Root>
+</div>
 <BottomSnippet />

@@ -3,6 +3,9 @@
 	import Testimonials from '$lib/components/Testimonials.svelte';
 </script>
 
+<svelte:head>
+	<title>Testimonials | Spotless</title>
+</svelte:head>
 <TopHero
 	title="Testimonials"
 	bread="Spotless > Testimonials"

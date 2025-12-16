@@ -25,7 +25,6 @@
 	const menuItems = [
 		{ id: '/dashboard', label: 'Dashboard', icon: LayoutDashboardIcon },
 		{ id: '/dashboard/news', label: 'News & Blogs', icon: NewspaperIcon },
-		{ id: '/dashboard/users', label: 'Users', icon: UsersIcon },
 		{ id: '/dashboard/messages', label: 'Contact Messages', icon: MailIcon },
 		{ id: '/', label: 'Go Back to Website', icon: ExternalLink }
 	];

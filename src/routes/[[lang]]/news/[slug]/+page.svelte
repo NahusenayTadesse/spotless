@@ -7,7 +7,7 @@
 	<title>{data.blog.title}</title>
 </svelte:head>
 
-<section class="relative w-full h-[80vh] lg:p-8 p-3">
+<section class="relative w-full lg:h-[80vh] h-[50vh] lg:p-8 p-3">
 	<div
 		class="h-full rounded-3xl overflow-hidden bg-contain bg-center flex flex-col justify-center items-center gap-4"
 		style="background-image: url('/files/{data.blog.featuredImage}');"
@@ -20,7 +20,7 @@
 </section>
 
 <Card.Root
-	class="border-0 w-3/4 justify-self-center shadow-lg shadow-primary/10 bg-linear-to-br from-card to-card/50"
+	class="border-0 lg:w-3/4 w-full justify-self-center shadow-lg shadow-primary/10 bg-linear-to-br from-card to-card/50"
 >
 	<Card.Header>
 		<Card.CardTitle class="text-center">

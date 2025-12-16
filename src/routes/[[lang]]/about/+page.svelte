@@ -1,11 +1,14 @@
 <script>
-	import { btn, glass } from '$lib/global.svelte';
+	import { btn, glass, isMobile } from '$lib/global.svelte';
 	import { ArrowRight } from '@lucide/svelte';
 	import TopHero from '$lib/components/TopHero.svelte';
 	import Counter from '$lib/components/Counter.svelte';
 	import Team from '$lib/components/Team.svelte';
 	import { Button } from '$lib/components/ui/button';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
+	import Separator from '$lib/components/ui/separator/separator.svelte';
+
+
 
 	let list = $state([
 		{ src: '/images/teams.svg', name: 62, small: 'Customers' },
@@ -80,18 +83,20 @@
 	>
 		{#each list as { src, name, small }}
 			<div
-				class=" flex flex-row gap-4 justify-center
+				class=" flex lg:flex-row flex-col gap-4 justify-center
           items-center py-4 p-4"
 			>
 				<img {src} alt={String(name)} class="w-24 h-24 bg-white/30 p-2 rounded-full" />
 				<div>
 					<h2 class="text-white text-extrabold">
-						<Counter value={name}
+						<Counter
+							value={name}
 							duration={1000}
 							format={(num) => {
-								
 								return Math.floor(num).toLocaleString();
-							}} />+</h2>
+							}}
+						/>+
+					</h2>
 					<p class="text-white">{small}</p>
 				</div>
 			</div>
@@ -105,18 +110,34 @@
 			Our main goal is to satisfy clients and provide quality through excellence and supervision
 		</h4>
 		<div class="flex flex-row gap-4 justify-start items-center">
-			<Button  variant={mission ? 'default' : 'outline' } {onclick}> Our Mission </Button>
-			<Button  variant={mission ? 'outline' : 'default' } {onclick}> Our Vision </Button>
+			<Button
+				variant={mission ? 'default' : 'outline'}
+				size={isMobile() ? 'sm' : 'default'}
+				{onclick}>Our Mission</Button
+			>
+			<Button
+				variant={mission ? 'outline' : 'default'}
+				size={isMobile() ? 'sm' : 'default'}
+				{onclick}>Our Vision</Button
+			>
 		</div>
 		{#if mission}
-		<p transition:fly={{y:-200, duration: 500}} class="w-full lg:w-124 transition-all duration-300 ease-in-out">
-			Our priority is to make our customers satisfied with our services by doing work focused on the
-			needs of our customers.
-		</p>
+			<p
+				transition:fly={{ y: -200, duration: 500 }}
+				class="w-full lg:w-124 transition-all duration-300 ease-in-out"
+			>
+				Our priority is to make our customers satisfied with our services by doing work focused on
+				the needs of our customers.
+			</p>
 		{:else}
-		<p transition:fly={{y:-200, duration: 500}} class="w-full lg:w-124	transition-call duration-300 ease-in-out">
-			To be the most trusted and innovative service provider in our industry, recognized for consistently exceeding customer expectations and setting new standards of quality, reliability, and customer-focused solutions.
-		</p>
+			<p
+				transition:fly={{ y: -200, duration: 500 }}
+				class="w-full lg:w-124 transition-call duration-300 ease-in-out"
+			>
+				To be the most trusted and innovative service provider in our industry, recognized for
+				consistently exceeding customer expectations and setting new standards of quality,
+				reliability, and customer-focused solutions.
+			</p>
 		{/if}
 	</div>
 
@@ -127,7 +148,7 @@
 	<h2 class="text-center font-bold text-background">Our Values</h2>
 
 	<div
-		class="grid sm:grid-cols-2 grid-cols-5 bg-background w-9/10 justify-self-center text-center rounded-[48px] py-6"
+		class="grid grid-cols-1 lg:grid-cols-5 bg-background w-9/10 justify-self-center text-center rounded-[48px] py-6"
 	>
 		{#each values as { title, description }}
 			<div
@@ -136,6 +157,7 @@
 			>
 				<h4 class="text-white">{title}</h4>
 				<p class="text-white">{description}</p>
+				<Separator class="lg:hidden" />
 			</div>
 		{/each}
 	</div>
@@ -159,4 +181,3 @@
 </section>
 
 <Team />
-

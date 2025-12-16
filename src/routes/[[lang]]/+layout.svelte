@@ -1,9 +1,10 @@
 <script lang="ts">
 	import './layout.css';
      import { Toaster } from "$lib/components/ui/sonner/index.js";
+     import { onMount } from 'svelte';
 
 	import Header from '$lib/components/Header.svelte';
-	
+
 	import Footer from '$lib/components/Footer.svelte';
 	import { getFlash } from 'sveltekit-flash-message';
 		import { toast } from 'svelte-sonner';
@@ -22,20 +23,29 @@
    $flash = undefined;
 });
 
+		let scrolled = $state(false);
+		onMount(() => {
+    const onScroll = () => {
+      scrolled = window.scrollY > 150;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => window.removeEventListener('scroll', onScroll);
+  });
+
 </script>
 
 <svelte:head>
 	<link rel="icon" href="/favicon.svg" />
 </svelte:head>
 <Toaster richColors closeButton />
- {#if  !page.url.pathname.startsWith('/dashboard')}
-	
-<Header />
+{#if !page.url.pathname.startsWith('/dashboard')}
+	<Header {scrolled} />
 {/if}
 
 {@render children()}
- {#if  !page.url.pathname.startsWith('/dashboard')}
-
-<Footer />
-
+{#if !page.url.pathname.startsWith('/dashboard')}
+	<Footer />
 {/if}

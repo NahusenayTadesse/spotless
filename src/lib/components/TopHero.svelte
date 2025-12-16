@@ -3,15 +3,16 @@
 	let { title = '', bread = '', para = '', image = '', button = '', href = '' } = $props();
 </script>
 
-<section class="relative w-full h-[80vh] lg:p-8 p-3">
+<section class="relative w-full lg:h-[80vh] h-[50vh] lg:p-8 p-3">
 	<div
 		class="h-full rounded-3xl overflow-hidden {image === ''
 			? "bg-[url('/images/hero.webp')]"
-			: `bg-[url('/files/${image}')]`} bg-cover bg-center flex flex-col justify-center items-center gap-4"
+			: `bg-[url('/files/${image}')]`} bg-cover bg-center flex flex-col
+			justify-center items-center gap-4 lg:px-0 px-2"
 	>
 		<h2 class="text-white text-center font-head">{title}</h2>
 		<h3 class="text-white text-center font-light">{bread}</h3>
-		<p class="text-white w-lg text-center">{para}</p>
+		<p class="text-white lg:w-lg w-full text-center">{para}</p>
 		{#if button !== ''}
 			<Button {href}>{button}</Button>
 		{/if}

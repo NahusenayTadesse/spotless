@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
-	import { glass } from '$lib/global.svelte';
-	import { TextAlignJustify, X, Languages } from '@lucide/svelte';
+	import { glass, isMobile } from '$lib/global.svelte';
+	import { TextAlignJustify, X, Languages, ChevronDown } from '@lucide/svelte';
 	import { fly, slide } from 'svelte/transition';
 	import { page } from '$app/state';
 
@@ -82,6 +82,36 @@
 
 </script>
 
+{#snippet lang()}
+	<DropdownMenu.Root>
+		<DropdownMenu.Trigger
+			class="bg-white/60 text-black lg:rounded-full rounded-lg
+		 p-2 flex lg:justify-center justify-start lg:items-center items-start w-full lg:w-10 lg:h-10"
+		>
+			{#if isMobile()}
+				Change Language <ChevronDown />
+			{:else}
+				<Languages class="" />
+			{/if}
+		</DropdownMenu.Trigger>
+		<DropdownMenu.Content>
+			{#each langs as l}
+				<DropdownMenu.Item>
+					<button
+						class:active={l === currentLang}
+						class="{l === page.params.lang
+							? 'bg-background text-white'
+							: 'bg-white/60 text-black'} w-full rounded-lg"
+						onclick={() => switchLang(l)}
+					>
+						{l.toUpperCase()}
+					</button>
+				</DropdownMenu.Item>
+			{/each}
+		</DropdownMenu.Content>
+	</DropdownMenu.Root>
+{/snippet}
+
 <nav class="p-12 hidden lg:block absolute top-6 z-50 w-full">
 	<div class="flex flex-row gap-8 justify-around items-center">
 		<div class="flex flex-row gap-4 items-center">
@@ -106,7 +136,7 @@
 						<a {href}>{name}</a>
 					</li>
 				{/each}
-				<DropdownMenu.Root>
+				<!-- <DropdownMenu.Root>
 					<DropdownMenu.Trigger
 						class="bg-white/60 text-black rounded-full p-2 flex justify-center items-center w-10 h-10"
 					>
@@ -127,15 +157,16 @@
 							</DropdownMenu.Item>
 						{/each}
 					</DropdownMenu.Content>
-				</DropdownMenu.Root>
+				</DropdownMenu.Root> -->
+				{@render lang()}
 			</ul>
 		</div>
 	</div>
 </nav>
 
 <nav
-	class="flex lg:hidden flex-row justify-between items-center p-4 fixed w-full top-0 z-50 {scrolled
-		? 'backdrop-blur-lg bg-white/30'
+	class="flex lg:hidden flex-row justify-between items-center p-4 px-8 fixed w-full top-0 z-50 {scrolled
+		? 'backdrop-blur-lg bg-white/45'
 		: 'bg-transparent'} space-x-4"
 >
 	<a href="/">
@@ -145,7 +176,7 @@
 			class="w-37.5 h-15"
 		/>
 	</a>
-	<div>
+	<div class="flex flex-row gap-3">
 		<button {onclick}>
 			<Menuicon class={scrolled ? 'text-foreground' : 'text-white'} />
 		</button>
@@ -166,6 +197,7 @@
 						</a>
 					</li>
 				{/each}
+				{@render lang()}
 			</ul>
 		{/if}
 	</div>

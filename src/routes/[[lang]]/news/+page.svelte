@@ -10,5 +10,8 @@
 	<title>News & Updates | Spotless</title>
 </svelte:head>
 <TopHero title="News & Updates" bread="Spotless > news & updates" />
-<BlogGrid posts={data.blogs} />
+<div class="lg:p-0 p-4">
+	<BlogGrid posts={data.blogs} />
+</div>
+
 <BottomSnippet />

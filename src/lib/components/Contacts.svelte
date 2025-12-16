@@ -12,7 +12,7 @@
 	];
 </script>
 
-<section class="w-9/10 h-[90vh] relative justify-self-center mt-16">
+<section class="lg:w-9/10 w-full h-[90vh] relative justify-self-center my-16">
 	<iframe
 		src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d12876.291170726457!2d38.723687896939715!3d9.034765769682997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s4%20kilo!5e0!3m2!1sen!2set!4v1762566576513!5m2!1sen!2set"
 		style="border:0;"
@@ -23,12 +23,12 @@
 	></iframe>
 
 	<div
-		class="absolute left-4 bg-white/40 rounded-lg top-2 flex flex-col gap-4 justify-center items-center"
+		class="lg:absolute lg:left-4 bg-background mx-4 lg:bg-white/40 rounded-lg top-2 flex flex-col gap-4 justify-center items-center"
 	>
-		<h2 class="text-extrabold text-background text-5xl!">Contacts Us</h2>
+		<h2 class="text-extrabold lg:text-background text-white text-5xl!">Contacts Us</h2>
 
 		<div
-			class="flex flex-col gap-8 bg-background p-8 justify-start items-start text-white rounded-lg w-lg"
+			class="flex flex-col gap-8 bg-background p-8 justify-start items-start text-white rounded-lg lg:w-lg w-full"
 		>
 			<p class="text-light">Location:</p>
 			<h3>Arat Kilo, Behind Tourist Hotel, Addis Ababa</h3>
