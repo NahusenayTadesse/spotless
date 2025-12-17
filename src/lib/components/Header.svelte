@@ -2,7 +2,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { glass, isMobile } from '$lib/global.svelte';
 	import { TextAlignJustify, X, Languages, ChevronDown } from '@lucide/svelte';
-	import { fly, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { page } from '$app/state';
 
 	let menu = [
@@ -12,6 +12,8 @@
 		{ name: 'News', href: '/news' },
 		{ name: 'Testimonials', href: '/testimonials' }
 	];
+
+
 
 	let faq = [
 		{ name: 'FAQ', href: '/faq' },
@@ -50,27 +52,41 @@
                  flex flex-col justify-center items-center text-white`;
 
   import { goto, invalidate } from '$app/navigation';
-	import Button from './ui/button/button.svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+ import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 
 
 
   let currentLang = $state(page.params.lang);
   const langs = ['en', 'am'];
+  const LANG_KEY   = 'app-lang';   // key used in localStorage
+  const DEFAULT    = 'en';         // fallback if nothing stored
 
+  /* ---------- helper ---------- */
+  function stripLangPrefix(path: string) {
+    return path.replace(new RegExp(`^/(${langs.join('|')})(/|$)`), '/');
+  }
+
+  /* ---------- switcher ---------- */
   function switchLang(newLang: string) {
     if (newLang === currentLang) return;
 
-    const pathname = page.url.pathname;
-    const cleanPath = pathname.replace(
-      new RegExp(`^/(${langs.join('|')})(/|$)`),
-      '/'
-    );
+    /* 1. remember choice */
+    localStorage.setItem(LANG_KEY, newLang);
 
-    goto(`/${newLang}${cleanPath === '/' ? '' : cleanPath}`, {
+    /* 2. build new url */
+    const clean = stripLangPrefix(page.url.pathname);
+    const target = (newLang === DEFAULT ? clean : `/${newLang}${clean}`);
+    document.cookie = `app-lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+
+    /* 3. go there */
+    goto(target, {
       invalidateAll: true
     });
+
+
   }
+
+
 
 
     $effect(() => {

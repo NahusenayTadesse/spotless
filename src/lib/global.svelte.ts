@@ -23,3 +23,22 @@ export const btn = `w-fit opacity-100 rounded-2xl gap-[10px] opacity-100 rounded
     if (typeof window === 'undefined') return false; // SSR guard
     return window.innerWidth <= 768;
   }
+
+
+  // src/lib/lang.svelte.js
+  import { browser } from '$app/environment';
+
+  const COOKIE_KEY = 'app-lang';
+  const DEFAULT    = 'en';
+
+  /* 1️⃣  reactive source of truth  */
+
+let lang: string = $state(DEFAULT)
+ if(browser) {
+
+     lang = localStorage.getItem(COOKIE_KEY,);
+
+ }
+export function amh() {
+   return lang === 'am'
+}

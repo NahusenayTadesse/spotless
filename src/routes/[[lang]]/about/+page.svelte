@@ -7,6 +7,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { fly } from 'svelte/transition';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
+	import { page } from '$app/state';
 
 
 
@@ -46,13 +47,20 @@
 	function onclick(){
 		 mission = !mission
 	}
+
+	let { data} = $props();
+
+let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 </script>
 
 <svelte:head>
 	<title>About Us | Spotless</title>
 </svelte:head>
 
-<TopHero title="About Us" bread="Spotless > about us" />
+<TopHero
+	title={lang ? 'ስለ እኛ' : 'About Us'}
+	bread={lang ? 'ስፖትለስ > ስለ እኛ' : 'Spotless > about us'}
+/>
 
 <section
 	class="mt-16 grid h-full lg:grid-cols-2 grid-cols-1 w-9/10 gap-16 justify-self-center justify-between items-start"
@@ -61,17 +69,23 @@
 		<img src="/images/about.webp" alt="" />
 	</div>
 	<div class="flex flex-col gap-4">
-		<h2 class="font-bold text-background">Our Story</h2>
+		<h2 class="font-bold text-background">{lang ? 'ጅማሬያችን' : 'Our Story'}</h2>
 		<p>
-			Spotless General Trading Plc is an Ethiopian-based private limited company established with a
+			{lang
+				? `ስፖትለስ ጄኔራል ትሬዲንግ ኃ.የተ.የግ.ማ. የተቋቋመ በኢትዮጵያ የተመሰረተ የግል ኩባንያ ነው።
+						ግልጽ ዓላማ - የተደራጀ፣ አስተማማኝ እና ከፍተኛ ጥራት ያለው ግብይት እና መገልገያ ለማቅረብ
+						በሁሉም ዘርፎች ለሚገኙ ድርጅቶች መፍትሄዎች. ኮርፖሬሽኖችን፣ መንግሥታዊ ያልሆኑ ድርጅቶችን፣ ኤምባሲዎችን እናገለግላለን
+						ፋብሪካዎች፣ ሆስፒታሎች እና ባለሀብቶች ሙያዊ ግዥዎችን በማቅረብ፣ አስተዳደር እና
+						የድጋፍ አገልግሎቶች በአንድ የታመነ ስም Spotless`
+				: `Spotless General Trading Plc is an Ethiopian-based private limited company established with a
 			clear purpose — to deliver organized, dependable, and high-quality trading and facility
 			solutions for organizations across all sectors. We serve corporations, NGOs, embassies,
 			factories, hospitals, and investors by providing professional procurement, management, and
-			support services under one trusted name: Spotless.
+			support services under one trusted name: Spotless.`}
 		</p>
 
 		<a href="/services" class="{btn} flex flex-row gap-2">
-			Services
+			{lang ? 'አገልግሎቶች' : 'Services'}
 			<ArrowRight class="w-8 h-8" />
 		</a>
 	</div>

@@ -35,6 +35,18 @@
     return () => window.removeEventListener('scroll', onScroll);
   });
 
+
+		import { browser } from '$app/environment';
+
+if (browser) {
+  const LANG_COOKIE = 'app-lang';
+  const saved = localStorage.getItem(LANG_COOKIE);
+  if (saved) {
+    // send it to the server as a cookie so layout.server.ts can see it
+    document.cookie = `${LANG_COOKIE}=${saved}; path=/; max-age=31536000`; // 1 year
+  }
+}
+
 </script>
 
 <svelte:head>

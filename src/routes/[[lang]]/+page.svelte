@@ -7,7 +7,10 @@
 	import { ArrowRight } from '@lucide/svelte';
 	import { page } from '$app/state';
 
-    let { data } = $props()
+    let { data } = $props();
+
+    let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
+
 
 </script>
 
@@ -23,14 +26,16 @@
 		content="Spotless, General Trading, Ethiopia, Trading, Property, Facility Management, Services"
 	/>
 </svelte:head>
-<Hero />
+<Hero current={data.lang} />
 <section
 	class="mt-16 grid h-full lg:grid-cols-2 grid-cols-1 w-9/10 gap-8 justify-self-center items-center"
 >
 	<div class="flex flex-col gap-4">
-		<h2 class="font-bold text-background">{data.lang === 'am' ? 'ስለ እኛ' : 'ABOUT US'}</h2>
+		<h2 class="font-bold text-background">
+			{lang ? 'ስለ እኛ' : 'ABOUT US'}
+		</h2>
 		<p>
-			{page.params.lang === 'am'
+			{lang
 				? 'በኢትዮጵያ የአገልግሎት ጥራትና አስተማማኝነትን ለማሻሻል የተቋቋመው ስፖትለስ ጄኔራል ትሬዲንግ ኃ.የተ.የግ.ማ. ሙሉ የንግድ፣ የንብረት እና የፋሲሊቲ አስተዳደር አገልግሎቶችን ይሰጣል። በተሞክሮ ቡድናችን፣ ጥብቅ ቁጥጥር እና ደንበኛ-የመጀመሪያ አቀራረብ እንኮራለን - እያንዳንዱ ፕሮጀክት በጊዜ፣ በስታንዳርድ እና በጠቅላላ ሙያዊ ብቃት መጠናቀቁን ማረጋገጥ።'
 				: `
 			Established to redefine service quality and reliability in Ethiopia, Spotless General Trading
@@ -40,7 +45,7 @@
 		</p>
 
 		<a href="/about" class="{btn} flex flex-row gap-2">
-			{page.params.lang === 'am' ? 'ተጨማሪ መረጃ ይመልከቱ' : 'Learn More'}
+			{lang ? 'ተጨማሪ መረጃ ይመልከቱ' : 'Learn More'}
 			<ArrowRight class="w-8 h-8" />
 		</a>
 	</div>
@@ -53,11 +58,11 @@
         absolute bottom-1 left-8 z-10"
 		>
 			<h3 class="text-white font-bold">30+</h3>
-			<h4 class="text-white">{page.params.lang === 'am' ? 'ጣቢያዎች' : 'Sites'}</h4>
+			<h4 class="text-white">{lang ? 'ጣቢያዎች' : 'Sites'}</h4>
 		</div>
 	</div>
 </section>
 
-<Services />
+<Services current={data.lang} />
 <Testimonials />
-<Contacts />
+<Contacts current={data.lang} />

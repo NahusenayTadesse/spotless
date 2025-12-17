@@ -1,6 +1,11 @@
 <script>
 	import { glass } from '$lib/global.svelte';
 	import { Facebook, Instagram, Mail, Phone } from '@lucide/svelte';
+	import { page } from '$app/state';
+
+	let { current } = $props();
+
+         let lang = $derived( page.params.lang === 'am' || current === 'am');
 
 	let Telegram = '/images/Telegram.svg';
 
@@ -25,13 +30,17 @@
 	<div
 		class="lg:absolute lg:left-4 bg-background mx-4 lg:bg-white/40 rounded-lg top-2 flex flex-col gap-4 justify-center items-center"
 	>
-		<h2 class="text-extrabold lg:text-background text-white text-5xl!">Contacts Us</h2>
+		<h2 class="text-extrabold lg:text-background text-white text-5xl!">
+			{lang ? 'አግኙን' : 'Contacts Us'}
+		</h2>
 
 		<div
 			class="flex flex-col gap-8 bg-background p-8 justify-start items-start text-white rounded-lg lg:w-lg w-full"
 		>
-			<p class="text-light">Location:</p>
-			<h3>Arat Kilo, Behind Tourist Hotel, Addis Ababa</h3>
+			<p class="text-light">{lang ? 'አድራሻ' : 'Location'}:</p>
+			<h3>
+				{lang ? '4 ኪሎ፣ ከቱሪስት ሆቴል ጀርባ፣ አዲስ አበባ' : 'Arat Kilo, Behind Tourist Hotel, Addis Ababa'}
+			</h3>
 
 			<div class="flex flex-col gap-2 px-4">
 				{#each contacts as contact (contact.contact)}

@@ -84,13 +84,17 @@ let servicesAmharic = $state([
 		{ src: '/images/eye.svg', name: 'ጠንካራ ቁጥጥር' },
 		{ src: '/images/focus.svg', name: 'የደንበኛ ትኩረት' }
 	];
+	let { current } = $props();
 
-	let serviceCurrent:  [{ title: string, description: string, btnNum: string, butStr: string, image: string }] = $state();
-	let listCurrent: [{ src: string, name: string }] = $state();
-	 $effect(()=> {
-		 serviceCurrent = page.params.lang === 'am' ? servicesAmharic : services;
-		 listCurrent = page.params.lang === 'am' ? list2 : list;
-		});
+      let lang = $derived( page.params.lang === 'am' || current === 'am');
+	// let serviceCurrent:  [{ title: string, description: string, btnNum: string, butStr: string, image: string }] = $state();
+	// let listCurrent: [{ src: string, name: string }] = $state();
+
+	  let serviceCurrent = $derived(lang ? servicesAmharic : services);
+	let	 listCurrent = $derived(lang ? list2 : list);
+
+
+
 
 </script>
 
@@ -121,7 +125,7 @@ let servicesAmharic = $state([
 
 <section class="flex flex-col w-full mt-16 gap-8 justify-center items-center">
 	<h2 class="text-center font-bold text-background">
-		{page.params.lang === 'am' ? 'ለምን እኛን ይመርጣሉ' : 'Why Choose Us'}
+		{lang ? 'ለምን እኛን ይመርጣሉ' : 'Why Choose Us'}
 	</h2>
 
 	<div
@@ -143,7 +147,7 @@ let servicesAmharic = $state([
 	<div class="flex flex-col items-start justify-center gap-8">
 		<h2 class="text-background font-bold!">{page.params.lang === 'am' ? 'ጽዳት' : 'Cleaning'}</h2>
 		<p>
-			{page.params.lang === 'am'
+			{lang
 				? `በስፖትለስ አጠቃላይ ትሬዲንግ፣ ሙያዊ የጽዳት መፍትሄዎችን በማቅረብ ላይ እንጠቀማለን። ቦታዎችዎን እንከን የለሽ፣ ምቹ እና ለአገልግሎት ዝግጁ ያድርጉ። ከፈጣን የአንድ ጊዜ ጽዳት እስከ
 የሙሉ መጠን የጽዳት አስተዳደር፣ አገልግሎቶቻችን ሁሉንም ፍላጎቶች ለማሟላት የተነደፉ ናቸው። 	አስተማማኝነት, ቅልጥፍና እና እንክብካቤ. በላቁ የጽዳት መሳሪያዎች የተደገፈ እና በጥራት የተፈተነ
 ምርቶች፣ እያንዳንዱ ገጽ እንዲበራ እናረጋግጣለን - የእርስዎን ደህንነት እና ትክክለኛነት እየጠበቅን አካባቢ.`
