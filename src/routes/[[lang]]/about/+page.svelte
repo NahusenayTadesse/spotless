@@ -11,14 +11,23 @@
 
 
 
-	let list = $state([
+	let listEnglish = $state([
 		{ src: '/images/teams.svg', name: 62, small: 'Customers' },
 		{ src: '/images/teams.svg', name: 15, small: 'Team Members' },
 		{ src: '/images/teams.svg', name: 300, small: 'Current Employees' },
 		{ src: '/images/teams.svg', name: 15, small: 'Years of Experience' }
 	]);
 
-	let values = [
+	let listAmharic = $state([
+		{ src: '/images/teams.svg', name: 62, small: 'ደንበኞች' },
+		{ src: '/images/teams.svg', name: 15, small: 'የቡድን አባላት' },
+		{ src: '/images/teams.svg', name: 300, small: 'አሁን ያሉን ሰራተኞች' },
+		{ src: '/images/teams.svg', name: 15, small: 'ዓመት ልምድ' }
+	]);
+
+
+
+	let valuesEnglish = $state([
 		{
 			title: 'Integrity',
 			description: 'We operate with transparency, honesty, and accountability in every transaction.'
@@ -40,7 +49,31 @@
 			title: 'Improvement',
 			description: 'We continuously seek better ways to serve, manage, and deliver.'
 		}
-	];
+	]);
+
+	let valuesAmharic = $state([
+		{
+			title: 'ታማኝነት',
+			description: 'በእያንዳንዱ ግብይት ውስጥ በግልፅ፣ በታማኝነት እና በተጠያቂነት እንሰራለን።'
+		},
+		{
+			title: 'ጥራት',
+			description:
+				'እንከን የለሽ አፈጻጸምን እና የረጅም ጊዜ የደንበኛ እምነትን ለማረጋገጥ ጥብቅ ደረጃዎችን እናከብራለን።'
+		},
+		{
+			title: 'ቅልጥፍና',
+			description: 'ውጤቱን በሰዓቱ፣ በበጀት እና ከሚጠበቀው በላይ በማቅረብ ላይ እናተኩራለን።'
+		},
+		{
+			title: 'ክብር',
+			description: 'እያንዳንዱ ደንበኛ፣ ሰራተኛ እና አጋር በፍትሃዊነት እና በክብር ይስተናገዳሉ።'
+		},
+		{
+			title: 'መሻሻል',
+			description: 'በቀጣይነት ለማገልገል፣ ለማስተዳደር እና ለማቅረብ የተሻሉ መንገዶችን እንፈልጋለን።'
+		}
+	]);
 
 	let mission = $state(true);
 
@@ -51,6 +84,8 @@
 	let { data} = $props();
 
 let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
+let list = $derived(lang ? listAmharic : listEnglish);
+let values = $derived(lang ? valuesAmharic : valuesEnglish);
 </script>
 
 <svelte:head>
@@ -121,18 +156,20 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 <section class="grid lg:grid-cols-2 grid-cols-1 mt-16 justify-self-center w-9/10">
 	<div class="flex flex-col gap-4">
 		<h4 class="text-background">
-			Our main goal is to satisfy clients and provide quality through excellence and supervision
+			{lang
+				? `ዋናው ግባችን ደንበኞችን ማሟላት እና ጥራትን በጥራት እና በከፍተኛ ጥራት ማቅረብ ነው።`
+				: 'Our main goal is to satisfy clients and provide quality through excellence and supervision'}
 		</h4>
 		<div class="flex flex-row gap-4 justify-start items-center">
 			<Button
 				variant={mission ? 'default' : 'outline'}
 				size={isMobile() ? 'sm' : 'default'}
-				{onclick}>Our Mission</Button
+				{onclick}>{lang ? 'የእኛ ተልዕኮ' : 'Our Mission'}</Button
 			>
 			<Button
 				variant={mission ? 'outline' : 'default'}
 				size={isMobile() ? 'sm' : 'default'}
-				{onclick}>Our Vision</Button
+				{onclick}>{lang ? 'የእኛ እይታ' : 'Our Vision'}</Button
 			>
 		</div>
 		{#if mission}
@@ -140,17 +177,23 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 				transition:fly={{ y: -200, duration: 500 }}
 				class="w-full lg:w-124 transition-all duration-300 ease-in-out"
 			>
-				Our priority is to make our customers satisfied with our services by doing work focused on
-				the needs of our customers.
+				{lang
+					? `ቅድሚያ የምንሰጠው ስራ ደንበኞቻችን በአገልግሎታችን እንዲረኩ ማድረግ ነው። የደንበኞቻችን ፍላጎት።`
+					: `Our priority is to make our customers satisfied with our services by doing work focused on
+				the needs of our customers.`}
 			</p>
 		{:else}
 			<p
 				transition:fly={{ y: -200, duration: 500 }}
 				class="w-full lg:w-124 transition-call duration-300 ease-in-out"
 			>
-				To be the most trusted and innovative service provider in our industry, recognized for
+				{lang
+					? `በእኛ ኢንዱስትሪ ውስጥ በጣም ታማኝ እና ፈጠራ ያለው አገልግሎት አቅራቢ ለመሆን ፣ እውቅና የተሰጠው
+			    በተከታታይ ከደንበኞች ከሚጠበቀው በላይ እና አዳዲስ የጥራት ደረጃዎችን በማውጣት ፣
+				አስተማማኝነት, እና ደንበኛ-ተኮር መፍትሄዎች.`
+					: `To be the most trusted and innovative service provider in our industry, recognized for
 				consistently exceeding customer expectations and setting new standards of quality,
-				reliability, and customer-focused solutions.
+				reliability, and customer-focused solutions.`}
 			</p>
 		{/if}
 	</div>
@@ -159,7 +202,7 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 </section>
 
 <section class="flex flex-col mt-16 gap-8 justify-center items-center">
-	<h2 class="text-center font-bold text-background">Our Values</h2>
+	<h2 class="text-center font-bold text-background">{lang ? 'እምነታችን' : 'Our Values'}</h2>
 
 	<div
 		class="grid grid-cols-1 lg:grid-cols-5 bg-background w-9/10 justify-self-center text-center rounded-[48px] py-6"
@@ -184,14 +227,20 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 		<img src="/images/about3.webp" alt="" />
 	</div>
 	<div class="flex flex-col gap-4">
-		<h3 class="font-bold text-background">Leadership Message</h3>
+		<h3 class="font-bold text-background">{lang ? 'የመሪዎቻችን መልዕክት' : 'Leadership Message'}</h3>
 		<p>
-			At Spotless, our goal is simple — to bring excellence and order to every service we deliver.
+			{lang
+				? `በስፖትለስ፣ ግባችን ቀላል ነው - ለምናቀርበው እያንዳንዱ አገልግሎት የላቀ እና ሥርዓት ለማምጣት።
+						የደንበኞቻችን እምነት ይመራናል፣ እና የእኛ የተደራጀ ክትትል መቼም እንዳንደራደር ያረጋግጣል
+						ጥራት.`
+				: `At Spotless, our goal is simple — to bring excellence and order to every service we deliver.
 			Our customers’ trust drives us, and our organized supervision ensures we never compromise on
-			quality.
+			quality.`}
 		</p>
-		<span class="font-bold! italic!"> — Kasech Ademasu, General Manager </span>
+		<span class="font-bold! italic!">
+			— {lang ? 'ካሰች አደማሱ - ዋና ስራ አስኪያጅ' : 'Kasech Ademasu, General Manager'}
+		</span>
 	</div>
 </section>
 
-<Team />
+<Team {lang} />

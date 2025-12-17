@@ -120,15 +120,35 @@
 			<Errors allErrors={$allErrors} />
 
 			{@render fe('Title', 'title', 'text', 'Enter the Title of the News', true)}
+			{@render fe(
+				'Title in Amharic',
+				'titleAmharic',
+				'text',
+				'Enter the Title of the News in Amharic',
+				true
+			)}
 
 			{@render selects('category', data?.categories)}
 
 			{@render textarea('Summary', 'summary', 'Enter the summary of the news', true, 5)}
+			{@render textarea(
+				'Summary Amharic',
+				'summaryAmharic',
+				'Enter the summary of the news in Amharic',
+				true,
+				5
+			)}
 
 			{@render fe('Content', 'content', 'hidden', '', true)}
 			<RichTextEditor
 				bind:value={$form.content}
 				placeholder="Enter the whole content of the news"
+			/>
+			{@render fe('Content Amharic', 'contentAmharic', 'hidden', '', true)}
+
+			<RichTextEditor
+				bind:value={$form.contentAmharic}
+				placeholder="Enter the whole content of the news in Amharic"
 			/>
 			<FileUpload name="featuredImage" {form} {errors} />
 			{@render selects('isPublished', [

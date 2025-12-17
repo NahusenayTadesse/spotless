@@ -12,14 +12,7 @@
   const { form, errors, enhance, delayed } = superForm(data);
 </script>
 
-{#snippet fe(
-	label = '',
-	name = '',
-	type = '',
-	placeholder = '',
-	required = false,
-    
-)}
+{#snippet fe(label = '', name = '', type = '', placeholder = '', required = false)}
 	<div class="flex w-full flex-col justify-start gap-2">
 		<Label for={name}>{label}</Label>
 		<Input
@@ -27,7 +20,6 @@
 			{name}
 			{placeholder}
 			{required}
-
 			bind:value={$form[name]}
 			aria-invalid={$errors[name] ? 'true' : undefined}
 		/>
@@ -37,16 +29,24 @@
 	</div>
 {/snippet}
 
-<form method="POST" action="?/addCategory" id="category" use:enhance class="flex flex-col gap-4"> 
-        {@render fe('Name', 'name', 'text', 'Enter name of category', true)}
-        {@render fe('Description', 'description', 'text', 'Add Description', true)}
-        <Button type="submit" class="mt-4" form="category">
-				{#if $delayed}
-					<Loader class="animate-spin" />
-					Adding Category
-				{:else}
-					<Plus class="h-4 w-4" />
-					Add Category
-				{/if}
-			</Button>
- </form>
+<form method="POST" action="?/addCategory" id="category" use:enhance class="flex flex-col gap-4">
+	{@render fe('Name', 'name', 'text', 'Enter name of category', true)}
+	{@render fe('Name in Amharic', 'nameAmharic', 'text', 'Enter name of category in Amharic', true)}
+	{@render fe('Description', 'description', 'text', 'Add Description', true)}
+	{@render fe(
+		'Description in Amharic',
+		'descriptionAmharic',
+		'text',
+		'Add Description in Amharic',
+		true
+	)}
+	<Button type="submit" class="mt-4" form="category">
+		{#if $delayed}
+			<Loader class="animate-spin" />
+			Adding Category
+		{:else}
+			<Plus class="h-4 w-4" />
+			Add Category
+		{/if}
+	</Button>
+</form>

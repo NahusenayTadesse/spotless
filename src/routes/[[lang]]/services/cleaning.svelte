@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button/index";
-	import { page } from '$app/state';
 
-  let cleaning = [
+  let cleaningEnglish = $state([
      { title: 'Immediate Cleaning',
        description: 'Making the House/office/building…etc ready for business or operation. Within this provision, service will be provided for once or periodically once in a week/month/or every three or 4 months as per the customer demand.'
      },
@@ -20,9 +19,9 @@ Toilette and bathroom ; service on demand for their toilet , bathroom`
  Monitoring and cleaning management  : a service rendered for particular firm as over taking the cleaning management division`
      },
 
-  ]
+  ])
 
-  let cleaningAmharic = [
+  let cleaningAmharic = $state([
      { title: 'ወዲያውኑ ጽዳት',
        description: 'ቤቱን/ቢሮውን/ህንጻውን… ወዘተ ለንግድ ወይም ለስራ ዝግጁ ማድረግ። በዚህ አቅርቦት ውስጥ፣ እንደ ደንበኛ ፍላጎት በሳምንት/ወር/ወይም በየሶስት ወይም 4 ወሩ አንድ ጊዜ አገልግሎት ለአንድ ወይም አልፎ አልፎ ይሰጣል።'
      },
@@ -41,14 +40,12 @@ Toilette and bathroom ; service on demand for their toilet , bathroom`
         የክትትልና የጽዳት አስተዳደር፡ የጽዳት አስተዳደር ክፍልን ከመውሰዱ በፊት ለተወሰነ ድርጅት የሚሰጥ አገልግሎት`
      },
 
-  ]
+  ])
 
-  let cleaningCurrent: [{title: string, description: string}] = $state();
+  let { lang=false } = $props();
 
-  $effect(() => {
-      cleaningCurrent = page.params.lang === 'am' ? cleaningAmharic : cleaning;
+  let cleaning = $derived(lang ? cleaningAmharic : cleaningEnglish )
 
-  });
 
 </script>
 
@@ -58,18 +55,16 @@ Toilette and bathroom ; service on demand for their toilet , bathroom`
 			class="pt-16 rounded-t-xl pb-32 w-full bg-background flex flex-col justify-center items-center gap-4"
 		>
 			<h4 class="text-white text-center">
-				{page.params.lang === 'am' ? 'የጽዳት አገልግሎቶች' : 'Cleaning Services'}
+				{lang ? 'የጽዳት አገልግሎቶች' : 'Cleaning Services'}
 			</h4>
 
 			<h3 class="text-white font-bold! text-center">
-				{page.params.lang === 'am'
-					? 'የጽዳት አገልግሎቶች መካከል ይምረጡ'
-					: 'Choose From Our Varieties of Cleaning Services'}
+				{lang ? 'የጽዳት አገልግሎቶች መካከል ይምረጡ' : 'Choose From Our Varieties of Cleaning Services'}
 			</h3>
 		</div>
 
 		<div class="grid lg:grid-cols-4 grid-cols-1 gap-4 -mt-16">
-			{#each cleaningCurrent as l}
+			{#each cleaning as l}
 				<div
 					class="p-6 rounded-xl bg-white shadow-2xl flex flex-col justify-start gap-16 items-center"
 				>
@@ -79,7 +74,7 @@ Toilette and bathroom ; service on demand for their toilet , bathroom`
 					</p>
 
 					<Button variant="outline" href="/contact" class="mt-auto"
-						>{page.params.lang === 'am' ? 'ቀጠሮ ይያዙ' : 'Book a Meeting'}</Button
+						>{lang ? 'ቀጠሮ ይያዙ' : 'Book a Meeting'}</Button
 					>
 				</div>
 			{/each}

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { glass } from '$lib/global.svelte';
-	import { page } from '$app/state';
 
-	let services = $state([
+	let servicesEnglish = $state([
 	{
 		title: 'Cleaning',
 		description: `We provide professional cleaning solutions for homes, offices, and commercial spaces. From one-time cleanups to full janitorial services, we ensure spotless results using modern equipment and safe, effective products.`,
@@ -71,27 +70,25 @@ let servicesAmharic = $state([
 ]);
 
 
-	let list = [
+	let listEnglish = $state([
 		{ src: '/images/teams.svg', name: 'Experienced Team' },
 		{ src: '/images/shake.svg', name: 'Reliable Service' },
 		{ src: '/images/eye.svg', name: 'Strong Supervision' },
 		{ src: '/images/focus.svg', name: 'Customer Focused' }
-	];
+	]);
 
-	let list2 = [
+	let listAmharic = $state([
 		{ src: '/images/teams.svg', name: 'ልምድ ያለው ቡድን' },
 		{ src: '/images/shake.svg', name: 'አስተማማኝ አገልግሎት' },
 		{ src: '/images/eye.svg', name: 'ጠንካራ ቁጥጥር' },
 		{ src: '/images/focus.svg', name: 'የደንበኛ ትኩረት' }
-	];
-	let { current } = $props();
+	]);
+	let { lang=false } = $props();
 
-      let lang = $derived( page.params.lang === 'am' || current === 'am');
-	// let serviceCurrent:  [{ title: string, description: string, btnNum: string, butStr: string, image: string }] = $state();
-	// let listCurrent: [{ src: string, name: string }] = $state();
 
-	  let serviceCurrent = $derived(lang ? servicesAmharic : services);
-	let	 listCurrent = $derived(lang ? list2 : list);
+
+	let services = $derived(lang ? servicesAmharic : servicesEnglish);
+	let	 list = $derived(lang ? listAmharic : listEnglish);
 
 
 
@@ -99,7 +96,7 @@ let servicesAmharic = $state([
 </script>
 
 <section class="grid lg:grid-cols-4 grid-cols-1 gap-4 w-9/10 justify-self-center mt-16">
-	{#each serviceCurrent as { title, description, btnNum, butStr, image }}
+	{#each services as { title, description, btnNum, butStr, image }}
 		<div
 			class="roudned-xl rounded-4xl
      bg-cover bg-center flex flex-col justify-between items-start p-8"
@@ -131,7 +128,7 @@ let servicesAmharic = $state([
 	<div
 		class="grid lg:grid-cols-4 grid-cols-1 bg-background w-4/5 justify-self-center text-center rounded-[48px] py-6"
 	>
-		{#each listCurrent as { src, name }}
+		{#each list as { src, name }}
 			<div
 				class="border-r-2 border-white flex flex-col gap-4 justify-center
           items-center py-4 p-4"
@@ -145,7 +142,7 @@ let servicesAmharic = $state([
 
 <section class="grid lg:grid-cols-2 grid-cols-1 gap-16 lg:px-[7%] px-4 py-24">
 	<div class="flex flex-col items-start justify-center gap-8">
-		<h2 class="text-background font-bold!">{page.params.lang === 'am' ? 'ጽዳት' : 'Cleaning'}</h2>
+		<h2 class="text-background font-bold!">{lang ? 'ጽዳት' : 'Cleaning'}</h2>
 		<p>
 			{lang
 				? `በስፖትለስ አጠቃላይ ትሬዲንግ፣ ሙያዊ የጽዳት መፍትሄዎችን በማቅረብ ላይ እንጠቀማለን። ቦታዎችዎን እንከን የለሽ፣ ምቹ እና ለአገልግሎት ዝግጁ ያድርጉ። ከፈጣን የአንድ ጊዜ ጽዳት እስከ

@@ -63,6 +63,6 @@
 	</div>
 </section>
 
-<Services current={data.lang} />
-<Testimonials />
-<Contacts current={data.lang} />
+<Services {lang} />
+<Testimonials {lang} />
+<Contacts {lang} />

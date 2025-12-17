@@ -14,14 +14,27 @@ export const load: PageServerLoad = async ({ params }) => {
 			category: newsCategories.name,
 			summary: news.summary,
 			content: news.content,
-			views: news.views
 		})
 		.from(news)
 		.leftJoin(newsCategories, eq(newsCategories.id, news.category))
 		.where(eq(news.slug, slug))
 		.then((rows) => rows[0]);
 
-	if (!blog) {
+	const blogAmharic = await db
+		.select({
+			title: news.titleAmharic,
+			slug: news.slug,
+			featuredImage: news.featuredImage,
+			category: newsCategories.nameAmharic,
+			summary: news.summaryAmharic,
+			content: news.contentAmharic,
+		})
+		.from(news)
+		.leftJoin(newsCategories, eq(newsCategories.id, news.category))
+		.where(eq(news.slug, slug))
+		.then((rows) => rows[0]);
+
+	if (!blog || !blogAmharic) {
 		error(404, 'No News With this name found');
 	}
 
@@ -33,6 +46,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		.where(eq(news.slug, slug));
 
 	return {
-		blog
+		blog,
+		blogAmharic
 	};
 };

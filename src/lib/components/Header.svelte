@@ -5,7 +5,7 @@
 	import { slide } from 'svelte/transition';
 	import { page } from '$app/state';
 
-	let menu = [
+	let menuEnglish = [
 		{ name: 'Home', href: '/' },
 		{ name: 'About Us', href: '/about' },
 		{ name: 'Services', href: '/services' },
@@ -13,14 +13,26 @@
 		{ name: 'Testimonials', href: '/testimonials' }
 	];
 
+	let menuAmharic = $state([
+		{ name: 'ዋና', href: '/' },
+		{ name: 'ስለ እኛ', href: '/about' },
+		{ name: 'አገልግሎቶች', href: '/services' },
+		{ name: 'ዜና', href: '/news' },
+		{ name: 'ምስክርነቶች', href: '/testimonials' },
+	]);
 
 
-	let faq = [
+
+	let faqAmharic = [
+		{ name: 'የሚጠየቁ ጥያቄዎች', href: '/faq' },
+		{ name: 'እኛን አግኙን', href: '/contact' }
+	];
+	let faqEnglish = [
 		{ name: 'FAQ', href: '/faq' },
 		{ name: 'Contact Us', href: '/contact' }
 	];
 
-	let mobileSections = [
+	let mobileSectionsEnglish = [
 		{ name: 'Home', href: '/' },
 		{ name: 'About Us', href: '/about' },
 		{ name: 'Services', href: '/services' },
@@ -28,6 +40,17 @@
 		{ name: 'Testimonials', href: '/testimonials' },
 		{ name: 'FAQ', href: '/faq' },
 		{ name: 'Contact Us', href: '/contact' }
+	];
+
+	let mobileSectionsAmharic = [
+	{ name: 'ዋና', href: '/' },
+	{ name: 'ስለ እኛ', href: '/about' },
+	   { name: 'አገልግሎቶች', href: '/services' },
+				{ name: 'ዜና', href: '/news' },
+				{ name: 'ምስክርነቶች', href: '/testimonials' },
+				{ name: 'ምስክርነቶች', href: '/testimonials' },
+				{ name: 'FAQ', href: '/faq' },
+				{ name: 'Contact Us', href: '/contact' }
 	];
 
 	let open = $state(false);
@@ -38,7 +61,7 @@
 	}
 
 	let Menuicon = $derived(open ? X : TextAlignJustify);
-	let { scrolled = false } = $props();
+	let { scrolled = false,  currentLanguage=false, data } = $props();
 
 	let visible = $state(false);
 	let duration = $state(600);
@@ -88,17 +111,22 @@
 
 
 
+      let menu = $derived(currentLanguage ? menuAmharic : menuEnglish);
+      let faq = $derived(currentLanguage ? faqAmharic : faqEnglish);
+      let mobileSections = $derived(currentLanguage ? mobileSectionsAmharic : mobileSectionsEnglish);
+
+
+
 
     $effect(() => {
       currentLang = page.params.lang;
     });
 
 
-    let langDrop = $state(false)
 
 </script>
 
-{#snippet lang()}
+{#snippet language()}
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger
 			class="bg-white/60 text-black lg:rounded-full rounded-lg
@@ -115,7 +143,7 @@
 				<DropdownMenu.Item>
 					<button
 						class:active={l === currentLang}
-						class="{l === page.params.lang
+						class="{l === page.params.lang || l === data
 							? 'bg-background text-white'
 							: 'bg-white/60 text-black'} w-full rounded-lg"
 						onclick={() => switchLang(l)}
@@ -174,7 +202,7 @@
 						{/each}
 					</DropdownMenu.Content>
 				</DropdownMenu.Root> -->
-				{@render lang()}
+				{@render language()}
 			</ul>
 		</div>
 	</div>
@@ -213,7 +241,7 @@
 						</a>
 					</li>
 				{/each}
-				{@render lang()}
+				{@render language()}
 			</ul>
 		{/if}
 	</div>

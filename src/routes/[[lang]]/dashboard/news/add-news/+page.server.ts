@@ -53,10 +53,13 @@ export const actions: Actions = {
 		}
 
 		const {
-			title,
+		title,
+			titleAmharic,
 			category,
 			summary,
+			summaryAmharic,
 			content,
+			contentAmharic,
 
 			isPublished,
             featuredImage
@@ -83,6 +86,7 @@ export const actions: Actions = {
 
 			await db.insert(news).values({
                  title,
+                 titleAmharic,
                  slug: title.trim()
 		.toLowerCase()
 		.replace(/\s+/g, '-')
@@ -92,7 +96,9 @@ export const actions: Actions = {
                  authorId: locals?.user?.id,
                  category,
                  summary,
+                 summaryAmharic,
                  content,
+                 contentAmharic,
                  isPublished,
                  featuredImage: recieptLink,
 				 views: 0
@@ -116,7 +122,7 @@ export const actions: Actions = {
 	},
 
     addCategory: async({request, cookies})=>{
-         
+
          		const form = await superValidate(request, zod4(categorySchema));
 
                 if (!form.valid) {
@@ -126,12 +132,14 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-         const { name, description } = form.data
+         const { name, nameAmharic, description, descriptionAmharic } = form.data
        try {
          await db.insert(newsCategories).values({
              name,
-             description
-         }); 
+             nameAmharic,
+             description,
+             descriptionAmharic
+         });
 
          			setFlash({ type: 'success', message: 'Category Successuflly Added' }, cookies);
 
@@ -145,4 +153,3 @@ export const actions: Actions = {
 		}
         }
     };
-

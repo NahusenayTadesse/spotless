@@ -1,7 +1,7 @@
 <script>
 	import { glass } from '$lib/global.svelte';
-	import { page } from '$app/state';
 	import { Phone } from '@lucide/svelte';
+	let { lang } = $props()
 </script>
 
 <div
@@ -16,16 +16,16 @@
 		</div>
 		<div class="flex flex-col gap-4 justify-center items-center">
 			<p class="text-white">
-				{page.params.lang === 'am' ? 'ለበለጠ መረጃ አግኙን።' : 'Contact Us for Further Information'}
+				{lang ? 'ለበለጠ መረጃ አግኙን።' : 'Contact Us for Further Information'}
 			</p>
 			<h4 class="text-white">+251 900 00 0000</h4>
 		</div>
 	</div>
 
 	<div class="flex flex-col gap-4 justify-center lg:items-start items-center">
-		<p class="text-white">{page.params.lang === 'am' ? 'አድራሻ' : 'Location'}</p>
+		<p class="text-white">{lang ? 'አድራሻ' : 'Location'}</p>
 		<h4 class="text-white">
-			{page.params.lang === 'am' ? '4 ኪሎ ከቱሪስት ሆቴል ጀርባ' : '4 Kilo behind Tourist Hotel'}
+			{lang ? '4 ኪሎ ከቱሪስት ሆቴል ጀርባ' : '4 Kilo behind Tourist Hotel'}
 		</h4>
 	</div>
 </div>

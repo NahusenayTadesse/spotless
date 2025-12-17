@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "740adf18-e2f3-40fe-a938-f9abd0e0b487",
+  "id": "2cc3f89e-2879-4aa7-8d5c-c15c40203e51",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "contact_messages": {
@@ -88,6 +88,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "title_amharic": {
+          "name": "title_amharic",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "category": {
           "name": "category",
           "type": "int",
@@ -109,8 +116,22 @@
           "notNull": false,
           "autoincrement": false
         },
+        "summary_amharic": {
+          "name": "summary_amharic",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "content": {
           "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "content_amharic": {
+          "name": "content_amharic",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -212,6 +233,12 @@
             "title"
           ]
         },
+        "news_title_amharic_unique": {
+          "name": "news_title_amharic_unique",
+          "columns": [
+            "title_amharic"
+          ]
+        },
         "news_slug_unique": {
           "name": "news_slug_unique",
           "columns": [
@@ -238,8 +265,22 @@
           "notNull": true,
           "autoincrement": false
         },
+        "name_amharic": {
+          "name": "name_amharic",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "description": {
           "name": "description",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "description_amharic": {
+          "name": "description_amharic",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
@@ -261,6 +302,12 @@
           "name": "news_categories_name_unique",
           "columns": [
             "name"
+          ]
+        },
+        "news_categories_name_amharic_unique": {
+          "name": "news_categories_name_amharic_unique",
+          "columns": [
+            "name_amharic"
           ]
         }
       },

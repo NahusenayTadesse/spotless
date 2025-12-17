@@ -32,7 +32,9 @@
 
 	$form.title = data.blog?.title;
 	$form.summary = data.blog?.summary;
+	$form.summaryAmharic = data.blog?.summaryAmharic;
 	$form.content = data.blog?.content;
+	$form.contentAmharic = data.blog?.contentAmharic;
 	$form.category = data.blog?.categoryId;
 
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
@@ -150,15 +152,35 @@
 			<Errors allErrors={$allErrors} />
 
 			{@render fe('Title', 'title', 'text', 'Enter the Title of the News', true)}
+			{@render fe(
+				'Title in Amharic',
+				'titleAmharic',
+				'text',
+				'Enter the Title of the News in Amharic',
+				true
+			)}
 
 			{@render selects('category', data?.categories)}
 
 			{@render textarea('Summary', 'summary', 'Enter the summary of the news', true, 5)}
+			{@render textarea(
+				'Summary Amharic',
+				'summaryAmharic',
+				'Enter the summary of the news in Amharic',
+				true,
+				5
+			)}
 
 			{@render fe('Content', 'content', 'hidden', '', true)}
 			<RichTextEditor
 				bind:value={$form.content}
 				placeholder="Enter the whole content of the news"
+			/>
+
+			{@render fe('Content in Amharic', 'contentAmharic', 'hidden', '', true)}
+			<RichTextEditor
+				bind:value={$form.contentAmharic}
+				placeholder="Enter the whole content of the news in Amharic"
 			/>
 
 			<input type="hidden" bind:value={$form.edit} name="edit" />

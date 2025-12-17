@@ -3,16 +3,27 @@
 	import { Facebook, Instagram, Mail, Phone } from '@lucide/svelte';
 	import { page } from '$app/state';
 
-	let menu = [
+	let menuEnglish = $state([
 		{ name: 'Home', href: '/' },
 		{ name: 'About Us', href: '/about' },
 		{ name: 'Services', href: '/services' },
 		{ name: 'News', href: '/news' },
 		{ name: 'Testimonials', href: '/testimonials' },
 		{ name: 'Contact', href: '/contact' }
-	];
+	]);
+
+	let menuAmharic = $state([
+		{ name: 'ዋና', href: '/' },
+		{ name: 'ስለ እኛ', href: '/about' },
+		{ name: 'አገልግሎቶች', href: '/services' },
+		{ name: 'ዜና', href: '/news' },
+		{ name: 'ምስክርነቶች', href: '/testimonials' },
+		{ name: 'አግኙን', href: '/contact' }
+	]);
 
 	let socials = [Phone, Mail, Facebook, Instagram];
+	let { lang=false } = $props();
+    let menu = $derived(lang ? menuAmharic : menuEnglish);
 </script>
 
 <footer
@@ -20,16 +31,16 @@
 >
 	<div class="flex flex-col gap-4 justify-center items-center justify-self-center">
 		<h3 class="font-head! text-center">
-			{page.params.lang === 'am' ? 'ተጨማሪ መረጃ ይጠይቁ' : 'Request More Information'}
+			{lang ? 'ተጨማሪ መረጃ ይጠይቁ' : 'Request More Information'}
 		</h3>
 		<p>
-			{page.params.lang === 'am'
+			{lang
 				? 'በኢትዮጵያ ውስጥ ምርጡ የንግድ እና ንብረት አገልግሎቶች አቅራቢ'
 				: 'The Best Trading & Property Services in Ethiopia'}
 		</p>
 
 		<a href="/contact" class="{btn} text-foreground! bg-white! mt-4"
-			>{page.params.lang === 'am' ? 'አግኙን' : 'Contact Us'}</a
+			>{lang ? 'አግኙን' : 'Contact Us'}</a
 		>
 	</div>
 
@@ -57,10 +68,14 @@
 
 	<div class="flex flex-col gap-4 justify-center items-center justify-self-center">
 		<h5 class="font-head! text-center">
-			Copyright © All Rights Reserved Spotless {new Date().getFullYear()}
+			{lang ? 'የቅጂ መብት' : 'Copyright'} © {lang
+				? 'ሁሉም መብቶች የተጠበቁ ናቸው። ስፖትለስ'
+				: 'All Rights Reserved Spotless'}
+			{new Date().getFullYear()}
 		</h5>
 		<p class="text-[12px]!">
-			Powered By <a href="https://pulsedataet.com" target="_blank">Pulse Data</a>
+			{lang ? 'የተገነባው በ' : 'Powered By'}
+			<a href="https://pulsedataet.com" target="_blank">{lang ? 'ፐልስ ዳታ' : 'Pulse Data'}</a>
 		</p>
 	</div>
 </footer>

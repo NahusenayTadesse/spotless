@@ -1,6 +1,11 @@
 <script>
 	let { data } = $props();
 	import * as Card from '$lib/components/ui/card/index.js';
+	import { page } from '$app/state';
+
+
+    let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
+
 </script>
 
 <svelte:head>
@@ -14,8 +19,12 @@
 	>
 		<div class="absolute inset-0 bg-primary/80 rounded-3xl lg:m-8 m-3"></div>
 
-		<h2 class="text-white text-center font-head z-10">{data.blog.title}</h2>
-		<p class="text-white w-lg text-center z-10">{data.blog.category}</p>
+		<h2 class="text-white text-center font-head z-10">
+			{lang ? data.blogAmharic.title : data.blog.title}
+		</h2>
+		<p class="text-white w-lg text-center z-10">
+			{lang ? data.blogAmharic.category : data.blog.category}
+		</p>
 	</div>
 </section>
 
@@ -24,10 +33,10 @@
 >
 	<Card.Header>
 		<Card.CardTitle class="text-center">
-			{data.blog.title}
+			{lang ? data.blogAmharic.title : data.blog.title}
 		</Card.CardTitle>
 		<Card.Description class="text-center w-1/2">
-			{data.blog.summary}
+			{lang ? data.blogAmharic.summary : data.blog.summary}
 		</Card.Description>
 	</Card.Header>
 
@@ -35,7 +44,11 @@
 		<img src="/files/{data.blog.featuredImage}" class="justify-self-center" alt="" />
 		<article class="prose prose-sm dark:prose-invert max-w-none">
 			<div class="space-y-6 text-foreground flex justify-center items-center my-4 leading-relaxed">
-				{@html data.blog.content}
+				{#if lang}
+					{@html data.blogAmharic.content}
+				{:else}
+					{@html data.blog.content}
+				{/if}
 			</div>
 		</article>
 	</Card.Content>

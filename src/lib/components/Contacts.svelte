@@ -1,11 +1,9 @@
 <script>
 	import { glass } from '$lib/global.svelte';
 	import { Facebook, Instagram, Mail, Phone } from '@lucide/svelte';
-	import { page } from '$app/state';
 
-	let { current } = $props();
+	let { lang = false } = $props();
 
-         let lang = $derived( page.params.lang === 'am' || current === 'am');
 
 	let Telegram = '/images/Telegram.svg';
 

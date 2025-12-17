@@ -5,13 +5,16 @@ const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
 
 export const schema = z.object({
-	title: z.string('Title is required').max(50),
+  title: z.string('Title is required').max(50),
+	titleAmharic: z.string('Title is required').max(50),
 
 	category: z.coerce.number('Category is required').int(),
 
 	summary: z.string().max(255).optional(),
+	summaryAmharic: z.string().max(255).optional(),
 
 	content: z.string('Content is required'),
+	contentAmharic: z.string('Content is required'),
 
 	isPublished: z.boolean().default(false),
 

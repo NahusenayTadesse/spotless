@@ -5,14 +5,17 @@
 	import type { Snippet } from 'svelte';
 
 	interface BlogPost {
-		title: string;
+	    title: string;
+		titleAmharic: string;
 		slug: string;
 		featuredImage: string;
 		category: string;
+		categoryAmharic: string;
 		summary: string;
+		summaryAmharic: string;
 	}
 
-	const { posts, children }: { posts: BlogPost[]; children?: Snippet } = $props();
+	const { posts, children, lang }: { posts: BlogPost[]; children?: Snippet, lang: boolean } = $props();
 
 	// Determine card size based on index for bento grid effect
 	const getCardSize = (index: number) => {
@@ -36,7 +39,7 @@
 						>
 							<img
 								src="/files/{post.featuredImage}"
-								alt={post.title}
+								alt={lang ? post.titleAmharic : post.title}
 								class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
 							/>
 							<div
@@ -49,7 +52,7 @@
 							<!-- Category Badge -->
 							<div class="flex items-start justify-between gap-2">
 								<Badge variant="secondary" class="text-xs font-semibold">
-									{post.category}
+									{lang ? post.categoryAmharic : post.category}
 								</Badge>
 								<ArrowRightIcon
 									class="size-4 text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1"
@@ -60,21 +63,21 @@
 							<h3
 								class={`font-bold text-foreground transition-colors duration-300 group-hover:text-primary line-clamp-2 ${isLarge ? 'text-xl' : 'text-lg'}`}
 							>
-								{post.title}
+								{lang ? post.titleAmharic : post.title}
 							</h3>
 
 							<!-- Summary -->
 							<p
 								class="text-sm text-muted-foreground flex-1 line-clamp-3 group-hover:text-foreground/80 transition-colors duration-300"
 							>
-								{post.summary}
+								{lang ? post.summaryAmharic : post.summary}
 							</p>
 
 							<!-- Read More Link -->
 							<div
 								class="flex items-center gap-2 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
 							>
-								<span>Read Article</span>
+								<span>{lang ? 'አንቀፅ ያንብቡ' : 'Read Article'}</span>
 								<ArrowRightIcon class="size-4" />
 							</div>
 						</div>

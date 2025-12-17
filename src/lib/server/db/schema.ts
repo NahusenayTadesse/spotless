@@ -28,18 +28,23 @@ export const session = mysqlTable('session', {
 export const newsCategories = mysqlTable('news_categories', {
 	id: int('id').autoincrement().primaryKey(),
 	name: varchar('name', { length: 50 }).notNull().unique(),
-	description: varchar('description', { length: 255 })
+	nameAmharic: varchar('name_amharic', { length: 50 }).notNull().unique(),
+	description: varchar('description', { length: 255 }),
+	descriptionAmharic: varchar('description_amharic', { length: 255 })
 });
 
 export const news = mysqlTable('news', {
 	id: int('id').autoincrement().primaryKey(),
 	title: varchar('title', { length: 50 }).notNull().unique(),
+	titleAmharic: varchar('title_amharic', { length: 50 }).notNull().unique(),
 	category: int('category')
 		.references(() => newsCategories.id)
 		.notNull(),
 	slug: varchar('slug', { length: 120 }).notNull().unique(),
 	summary: varchar('summary', { length: 255 }),
+	summaryAmharic: varchar('summary_amharic', { length: 255 }),
 	content: text('content').notNull(),
+	contentAmharic: text('content_amharic').notNull(),
 	authorId: varchar('author_id', { length: 255 })
 		.notNull()
 		.references(() => user.id),

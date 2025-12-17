@@ -12,13 +12,16 @@ export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;
 	const blog = await db
 		.select({
-			title: news.title,
+		title: news.title,
+			titleAmharic: news.titleAmharic,
 			slug: news.slug,
 			featuredImage: news.featuredImage,
 			categoryId: news.category,
 			category: newsCategories.name,
 			summary: news.summary,
+			summaryAmharic: news.summaryAmharic,
 			content: news.content,
+			contentAmharic: news.contentAmharic,
 			views: news.views
 		})
 		.from(news)
@@ -82,7 +85,7 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		const { title, category, summary, content, isPublished, featuredImage, edit } = form.data;
+		const { title, titleAmharic, category, summary, summaryAmharic, content, contentAmharic, isPublished, featuredImage, edit } = form.data;
 
 		try {
 			if (edit) {
@@ -133,10 +136,13 @@ export const actions: Actions = {
 							.replace(/[^a-z0-9-]/g, '')
 							.replace(/-+/g, '-')
 							.replace(/^-+|-+$/g, ''),
+						titleAmharic,
 						authorId: locals?.user?.id,
 						category,
 						summary,
+						summaryAmharic,
 						content,
+						contentAmharic,
 						isPublished
 					})
 					.where(eq(news.slug, slug));
