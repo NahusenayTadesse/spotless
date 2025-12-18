@@ -5,7 +5,7 @@ import { btn, glass } from '$lib/global.svelte';
 
 let { current } = $props();
 
-let lang = $derived( page.params.lang === 'am' || current === 'am')
+let lang = $derived( page.params.lang === 'am' || current === 'am');
 
 </script>
 

@@ -2,8 +2,10 @@
 	import { afterNavigate } from '$app/navigation';
 	import { glass, isMobile } from '$lib/global.svelte';
 	import { TextAlignJustify, X, Languages, ChevronDown } from '@lucide/svelte';
-	import { slide } from 'svelte/transition';
+	import { slide, fade } from 'svelte/transition';
 	import { page } from '$app/state';
+ import * as Sheet from "$lib/components/ui/sheet/index.js";
+
 
 	let menuEnglish = [
 		{ name: 'Home', href: '/' },
@@ -49,15 +51,14 @@
 				{ name: 'ዜና', href: '/news' },
 				{ name: 'ምስክርነቶች', href: '/testimonials' },
 				{ name: 'ምስክርነቶች', href: '/testimonials' },
-				{ name: 'FAQ', href: '/faq' },
-				{ name: 'Contact Us', href: '/contact' }
+				{ name: 'የሚጠየቁ ጥያቄዎች', href: '/faq' },
+				{ name: 'እኛን አግኙን', href: '/contact' }
 	];
 
 	let open = $state(false);
 
 	function onclick() {
-		if (open === true) return (open = false);
-		else return (open = true);
+      open = !open;
 	}
 
 	let Menuicon = $derived(open ? X : TextAlignJustify);
@@ -122,6 +123,7 @@
       currentLang = page.params.lang;
     });
 
+    let test = $state(false)
 
 
 </script>
@@ -133,7 +135,7 @@
 		 p-2 flex lg:justify-center justify-start lg:items-center items-start w-full lg:w-10 lg:h-10"
 		>
 			{#if isMobile()}
-				Change Language <ChevronDown />
+				{currentLanguage ? 'ቋንቋ ቀይር' : 'Change Language'} <ChevronDown />
 			{:else}
 				<Languages class="" />
 			{/if}
@@ -214,20 +216,17 @@
 		: 'bg-transparent'} space-x-4"
 >
 	<a href="/">
-		<img
-			src={scrolled ? '/logomain.svg' : '/logomain.svg'}
-			alt="Spotless Logo"
-			class="w-37.5 h-15"
-		/>
+		<img src="/logomain.svg" alt="Spotless Logo" class="w-37.5 h-15" />
 	</a>
-	<div class="flex flex-row gap-3">
-		<button {onclick}>
+	<!-- <div class="flex flex-row gap-3 relative">
+		<button {onclick} class="text-white">
+			{open}
 			<Menuicon class={scrolled ? 'text-foreground' : 'text-white'} />
 		</button>
 		{#if open}
 			<ul
-				class="flex flex-col w-full absolute top-16 p-2 right-0
-         z-100 gap-2 {glass} justify-center items-start pl-4 bg-background/20!"
+				class="flex flex-col w-full absolute top- p-2 right-0
+         z-100! gap-2 {glass} justify-center items-start pl-4 bg-background/20!"
 			>
 				{#each mobileSections as { name, href } (href)}
 					<li transition:slide|global>
@@ -244,5 +243,36 @@
 				{@render language()}
 			</ul>
 		{/if}
-	</div>
+	</div> -->
+	<Sheet.Root bind:open>
+		<Sheet.Trigger><Menuicon class={scrolled ? 'text-foreground' : 'text-white'} /></Sheet.Trigger>
+		<Sheet.Content side="left" class="bg-white/50! {glass}">
+			<Sheet.Header>
+				<Sheet.Title
+					><a href="/">
+						<img src="/logomain.svg" alt="Spotless Logo" class="w-37.5 h-15" />
+					</a></Sheet.Title
+				>
+			</Sheet.Header>
+
+			<ul
+				class="flex flex-col w-full
+         z-100! gap-2 justify-center items-start pl-4"
+			>
+				{#each mobileSections as { name, href } (href)}
+					<li in:slide|global out:fade>
+						<a
+							{href}
+							title={name}
+							class="text-black transition-transform duration-300 ease-in-out hover:scale-125"
+							{onclick}
+						>
+							{name}
+						</a>
+					</li>
+				{/each}
+				{@render language()}
+			</ul>
+		</Sheet.Content>
+	</Sheet.Root>
 </nav>

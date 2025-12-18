@@ -45,8 +45,8 @@
 	title={lang ? 'ምስክርነቶች' : 'Testimonials'}
 	bread={lang ? 'ስፖትለስ > ምስክርነቶች' : 'Spotless > Testimonials'}
 	para={lang
-		? 'ምስክርነቶች በስፖትለስ ጀነራል ትሬዲንግ ኃ.የተ.የግ.ማ.፣ ስኬታችን የተገነባው በደንበኞቻችን እርካታ እና እምነት ላይ ነው። ከተጠበቀው በላይ የሆኑ አገልግሎቶችን በማቅረብ እንኮራለን - በቋሚነት፣ በሙያዊ እና እንከን የለሽ ውጤቶች። አንዳንድ ውድ አጋሮቻችን እና ደንበኞቻችን ከእኛ ጋር ስለመስራት የሚናገሩት እነሆ።'
-		: 'Testimonials At Spotless General Trading Plc, our success is built on the satisfaction and trust of our clients. We take pride in delivering services that exceed expectations — consistently, professionally, and with spotless results. Here’s what some of our valued partners and customers have to say about working with us.'}
+		? 'ምስክርነቶች በስፖትለስ ጀነራል ትሬዲንግ ኃ.የተ.የግ.ማ.፣ ስኬታችን የተገነባው በደንበኞቻችን እርካታ እና እምነት ላይ ነው። '
+		: 'Testimonials At Spotless General Trading Plc, our success is built on the satisfaction and trust of our clients. '}
 />
 
 <Testimonials />
