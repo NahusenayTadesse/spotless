@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { glass } from '$lib/global.svelte';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
+	import { page } from '$app/state';
 
 	let servicesEnglish = $state([
 	{
@@ -162,7 +163,7 @@ let servicesAmharic = $state([
 
 
 
-	let { lang=false } = $props();
+	let { lang=false, homePage=false } = $props();
 
 
 
@@ -171,13 +172,18 @@ let servicesAmharic = $state([
 	let	 list = $derived(lang ? listAmharic : listEnglish);
 
 
-   let selectedService = $state(0)
+	let selectedService = $derived(
+    Number(page.url.hash.match(/\d+/)?.[0] ?? 0)
+  );
+
+   let transition = `transition-all duration-300 ease-in-out`
 
 </script>
 
 <section class="grid lg:grid-cols-4 grid-cols-1 gap-4 w-9/10 justify-self-center mt-16">
 	{#each services as { title, description, btnNum, butStr, image }, index}
-		<button
+		<a
+			href={homePage ? '/services/#services' + index : '#services'}
 			onclick={() => (selectedService = index)}
 			class="roudned-xl rounded-4xl
      bg-cover bg-center flex flex-col justify-between items-start p-8 {selectedService === index
@@ -199,43 +205,49 @@ let servicesAmharic = $state([
 					{butStr}
 				</h4>
 			</div>
-		</button>
+		</a>
 	{/each}
+	<span id="services{selectedService}"></span>
 </section>
+{#if !homePage}
+	{#key selectedService}
+		<section class="grid lg:grid-cols-2 grid-cols-1 gap-16 lg:px-[7%] px-4 py-24">
+			<div class="flex flex-col items-start justify-center gap-8">
+				<h2
+					class="text-background font-bold! {transition}"
+					transition:fly={{ x: -100, duration: 400 }}
+				>
+					{servicesLonger[selectedService].title}
+				</h2>
+				<p class={transition} transition:fly={{ y: -100, delay: 100, duration: 400 }}>
+					{servicesLonger[selectedService].description}
+				</p>
+			</div>
 
-<section class="grid lg:grid-cols-2 grid-cols-1 gap-16 lg:px-[7%] px-4 py-24">
-	<div class="flex flex-col items-start justify-center gap-8">
-		<h2
-			class="text-background font-bold! transition-all duration-300 ease-in-out"
-			transition:fly={{ x: -100, duration: 300, delay: 100 }}
-		>
-			{servicesLonger[selectedService].title}
-		</h2>
-		<p transition:fade={{ duration: 300, delay: 100 }}>
-			{servicesLonger[selectedService].description}
-		</p>
-	</div>
-
-	<!-- <div>
+			<!-- <div>
 		<img src="/images/mopblue.webp" alt="Cleaning Mop and bucket" />
 	</div> -->
-	<div class="flex flex-col gap-4 justify-center items-center relative">
-		<img src="/images/mopblue.webp" alt="" class="w-full h-auto" />
+			<div class="flex flex-col gap-4 justify-center items-center relative">
+				<img src="/images/mopblue.webp" alt="" class="w-full h-auto" />
 
-		<div
-			class="bg-background p-8 flex flex-col items-center justify-center rounded-lg
+				<div
+					class="bg-background p-8 flex flex-col items-center justify-center rounded-lg
         absolute -bottom-4 left-24 z-10"
-		>
-			<h3 class="text-white font-bold" transition:fade={{ duration: 300, delay: 100 }}>
-				{servicesLonger[selectedService].btnNum}
-			</h3>
-			<h4 class="text-white" transition:fade={{ duration: 300, delay: 100 }}>
-				{servicesLonger[selectedService].butStr}
-			</h4>
-		</div>
-	</div>
-</section>
-<section class="flex flex-col w-full mt-16 gap-8 justify-center items-center">
+					transition:fly={{ y: 100, duration: 400 }}
+				>
+					<h3 class="text-white font-bold {transition}">
+						{servicesLonger[selectedService].btnNum}
+					</h3>
+					<h4 class="text-white {transition}">
+						{servicesLonger[selectedService].butStr}
+					</h4>
+				</div>
+			</div>
+		</section>
+	{/key}
+{/if}
+
+<!-- <section class="flex flex-col w-full mt-16 gap-8 justify-center items-center">
 	<h2 class="text-center font-bold text-background">
 		{lang ? 'ለምን እኛን ይመርጣሉ' : 'Why Choose Us'}
 	</h2>
@@ -253,4 +265,4 @@ let servicesAmharic = $state([
 			</div>
 		{/each}
 	</div>
-</section>
+</section> -->

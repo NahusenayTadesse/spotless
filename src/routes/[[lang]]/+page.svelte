@@ -83,6 +83,6 @@
 	</div>
 </section>
 
-<Services {lang} />
+<Services {lang} homePage={true} />
 <Testimonials {lang} />
 <Contacts {lang} />
