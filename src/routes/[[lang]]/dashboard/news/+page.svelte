@@ -44,12 +44,14 @@
 										{article.title}
 									</h3>
 									<p class="text-sm text-muted-foreground mt-1">{article.summary}</p>
+									<p class="text-sm text-muted-foreground mt-1">Views: {article.views}</p>
 								</div>
 							</div>
 							<div class="flex items-center justify-between">
 								<div class="flex items-center gap-2 text-sm text-muted-foreground">
 									<span class="font-medium">{article.author}</span>
 								</div>
+
 								<Button
 									size="sm"
 									variant="ghost"
