@@ -10,6 +10,31 @@
 
 <svelte:head>
 	<title>{data.blog.title}</title>
+
+	<!-- Basic SEO -->
+	<title>{data.blog.title}</title>
+	<meta name="description" content={data.blog.summary} />
+	<meta name="robots" content="index, follow" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href={`/news/${data.blog.slug}`} />
+
+	<!-- Open Graph (Facebook, LinkedIn, WhatsApp, etc.) -->
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content={data.blog.title} />
+	<meta property="og:description" content={data.blog.summary} />
+	<meta property="og:image" content={`/files/${data.blog.featuredImage}`} />
+	<meta property="og:url" content={`/news/${data.blog.slug}`} />
+	<meta property="og:site_name" content="Your Site Name" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={data.blog.title} />
+	<meta name="twitter:description" content={data.blog.summary} />
+	<meta name="twitter:image" content="/files/{data.blog.featuredImage}" />
+
+	<!-- Optional: Article metadata -->
+	<meta property="article:section" content={data.blog.category} />
 </svelte:head>
 
 <section class="relative w-full lg:h-[80vh] h-[50vh] lg:p-8 p-3">
@@ -43,7 +68,9 @@
 	<Card.Content class="pt-8 pb-8">
 		<img src="/files/{data.blog.featuredImage}" class="justify-self-center" alt="" />
 		<article class="prose prose-sm dark:prose-invert max-w-none">
-			<div class="space-y-6 text-foreground flex justify-center items-center my-4 leading-relaxed">
+			<div
+				class="space-y-6 text-foreground flex flex-col justify-center items-start my-4 leading-relaxed"
+			>
 				{#if lang}
 					{@html data.blogAmharic.content}
 				{:else}
