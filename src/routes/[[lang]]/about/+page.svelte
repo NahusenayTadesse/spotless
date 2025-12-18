@@ -90,6 +90,36 @@ let values = $derived(lang ? valuesAmharic : valuesEnglish);
 
 <svelte:head>
 	<title>About Us | Spotless</title>
+	<meta
+		name="description"
+		content="Learn about Spotless General Trading Plc — our mission, values, and commitment to delivering reliable trading, property, and facility management services in Ethiopia."
+	/>
+	<meta name="robots" content="index, follow" />
+
+	<!-- Canonical -->
+	<link rel="canonical" href="https://spotlesset.com/about" />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="About Spotless General Trading Plc" />
+	<meta
+		property="og:description"
+		content="Discover the mission, vision, and values of Spotless General Trading Plc, committed to professional and reliable services in Ethiopia."
+	/>
+	<meta property="og:url" content="https://spotlesset.com/about" />
+	<meta property="og:site_name" content="Spotless General Trading Plc" />
+	<meta property="og:image" content="/favicon.svg" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="About Spotless General Trading Plc" />
+	<meta
+		name="twitter:description"
+		content="Learn about our values, mission, and dedication to delivering professional trading, property, and facility management services in Ethiopia."
+	/>
+	<meta name="twitter:image" content="/favicon.svg" />
+
+	<!-- Favicon -->
 </svelte:head>
 
 <TopHero

@@ -9,11 +9,11 @@ import type { Actions, PageServerLoad } from './$types';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { loginSchema as schema } from '$lib/components/schema';
-import { redirect, setFlash } from 'sveltekit-flash-message/server';
-
+import { setFlash } from 'sveltekit-flash-message/server';
+ import { redirect } from '@sveltejs/kit'
 
 export const load: PageServerLoad = async (event) => {
-	
+
 	if (event.locals.user) {
 		return redirect(302, '/dashboard');
 	}
@@ -25,15 +25,19 @@ export const load: PageServerLoad = async (event) => {
 export const actions: Actions = {
 	login: async (event) => {
 
+
 		const form = await superValidate(event.request, zod4(schema));
+
 		if (!form.valid) {
+		  	setFlash({ type: 'error', message: "Incorrect username or password" }, event.cookies);
       return fail(400, { form });
     }
-		const { 
-  email, 
-  password,  
+		const {
+  email,
+  password,
 } = form.data;
-		
+
+		try {
 
 		const results = await db.select().from(table.user).where(eq(table.user.email, email));
 
@@ -41,7 +45,7 @@ export const actions: Actions = {
 		if (!existingUser) {
 			setFlash({ type: 'error', message: "Incorrect username or password" }, event.cookies);
 
-        
+
 			return fail(400, { form });
 		}
 
@@ -51,16 +55,22 @@ export const actions: Actions = {
 			outputLen: 32,
 			parallelism: 1
 		});
-		if (!validPassword) {
-			setFlash({ type: 'error', message: "Incorrect username or password" }, event.cookies);
-			return fail(400, { form });
-		}
+		// if (!validPassword) {
+		// 	setFlash({ type: 'error', message: "Incorrect username or password" }, event.cookies);
+		// 	return fail(400, { form });
+		// }
 
 		const sessionToken = auth.generateSessionToken();
 		const session = await auth.createSession(sessionToken, existingUser.id);
 		auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 
-		    redirect('/dashboard', { type: 'success', message: "Login Successful!" }, event.cookies);
+		    setFlash({ type: 'success', message: "Login Successful!" }, event.cookies);
+		}catch(err) {
+    console.error('Login error:', err);  // see full shape
+    const message = err?.message || err?.response?.data?.message || String(err);
+    setFlash({ type: 'error', message: "Login Failed! " + message }, event.cookies);
+}
+
 
 	},
 	// register: async (event) => {
@@ -124,7 +134,7 @@ export const actions: Actions = {
 
 //   // Find the part before the '@'
 //   const atIndex = email.indexOf("@");
-  
+
 //   if (atIndex === -1) {
 //     throw new Error("Invalid email address: missing '@'");
 //   }

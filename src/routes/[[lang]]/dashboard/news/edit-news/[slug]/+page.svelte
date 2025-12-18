@@ -7,7 +7,7 @@
 	import DatePicker from '$lib/components/DatePicker.svelte';
 
 	import * as Card from '$lib/components/ui/card/index.js';
-	import { Plus, Loader, Pen, X, Trash } from '@lucide/svelte';
+	import { Loader, Pen, X, Trash } from '@lucide/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { zod4Client } from 'sveltekit-superforms/adapters';
 	import { schema } from './schema.js';
@@ -31,6 +31,7 @@
 	export const snapshot: Snapshot = { capture, restore };
 
 	$form.title = data.blog?.title;
+	$form.titleAmharic = data.blog?.titleAmharic;
 	$form.summary = data.blog?.summary;
 	$form.summaryAmharic = data.blog?.summaryAmharic;
 	$form.content = data.blog?.content;
@@ -206,10 +207,10 @@
 			<Button type="submit" class="mt-4" form="main">
 				{#if $delayed}
 					<Loader class="animate-spin" />
-					Adding Article
+					Saving Edited Article
 				{:else}
-					<Plus class="h-4 w-4" />
-					Add Article
+					<Pen class="h-4 w-4" />
+					Save Edited Article
 				{/if}
 			</Button>
 		</form>

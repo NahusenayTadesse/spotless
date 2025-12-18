@@ -35,6 +35,35 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 
 <svelte:head>
 	<title>Contact Us | Spotless</title>
+
+	<meta
+		name="description"
+		content="Get in touch with Spotless General Trading Plc for inquiries about trading, property, and facility management services in Ethiopia. We're here to assist you."
+	/>
+	<meta name="robots" content="index, follow" />
+
+	<!-- Canonical -->
+	<link rel="canonical" href="https://spotlesset.com/contact" />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Contact Us | Spotless General Trading Plc" />
+	<meta
+		property="og:description"
+		content="Reach out to Spotless General Trading Plc for professional support in trading, property, and facility management services in Ethiopia."
+	/>
+	<meta property="og:url" content="https://spotlesset.com/contact" />
+	<meta property="og:site_name" content="Spotless General Trading Plc" />
+	<meta property="og:image" content="/favicon.svg" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Contact Us | Spotless General Trading Plc" />
+	<meta
+		name="twitter:description"
+		content="Contact Spotless General Trading Plc for inquiries and professional services in trading, property, and facility management in Ethiopia."
+	/>
+	<meta name="twitter:image" content="/favicon.svg" />
 </svelte:head>
 {#snippet fe(
 	label = '',

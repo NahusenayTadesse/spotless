@@ -60,7 +60,7 @@
 		<Card.CardTitle class="text-center">
 			{lang ? data.blogAmharic.title : data.blog.title}
 		</Card.CardTitle>
-		<Card.Description class="text-center w-1/2">
+		<Card.Description class="text-center w-1/2 flex flex-col justify-center items-center">
 			{lang ? data.blogAmharic.summary : data.blog.summary}
 		</Card.Description>
 	</Card.Header>

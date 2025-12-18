@@ -123,6 +123,34 @@
 
 <svelte:head>
 	<title>FAQ | Spotless</title>
+	<meta
+		name="description"
+		content="Find answers to frequently asked questions about Spotless General Trading Plc's trading, property, and facility management services in Ethiopia."
+	/>
+	<meta name="robots" content="index, follow" />
+
+	<!-- Canonical -->
+	<link rel="canonical" href="https://spotlesset.com/faq" />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="FAQ | Spotless General Trading Plc" />
+	<meta
+		property="og:description"
+		content="Explore frequently asked questions and get quick answers about Spotless General Trading Plc's professional services in Ethiopia."
+	/>
+	<meta property="og:url" content="https://spotlesset.com/faq" />
+	<meta property="og:site_name" content="Spotless General Trading Plc" />
+	<meta property="og:image" content="/favicon.svg" />
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="FAQ | Spotless General Trading Plc" />
+	<meta
+		name="twitter:description"
+		content="Find answers to common questions about Spotless General Trading Plc's trading, property, and facility management services in Ethiopia."
+	/>
+	<meta name="twitter:image" content="/favicon.svg" />
 </svelte:head>
 <TopHero
 	title={lang ? 'የሚጠየቁ ጥያቄዎች' : 'Frequently Asked Questions'}

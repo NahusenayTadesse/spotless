@@ -54,35 +54,6 @@ if (browser) {
 
 <svelte:head>
 	<!-- Primary Meta -->
-	<title>Spotless General Trading Plc | Trading, Property & Facility Management</title>
-	<meta
-		name="description"
-		content="Spotless General Trading Plc delivers reliable trading, property, and facility management services in Ethiopia, driven by professionalism, strict supervision, and a client-first approach."
-	/>
-	<meta name="robots" content="index, follow" />
-
-	<!-- Canonical -->
-	<link rel="canonical" href="https://spotlesset.com" />
-
-	<!-- Open Graph -->
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Spotless General Trading Plc" />
-	<meta
-		property="og:description"
-		content="Redefining service quality and reliability in Ethiopia through expert trading, property, and facility management services."
-	/>
-	<meta property="og:url" content="https://spotless.com.et" />
-	<meta property="og:site_name" content="Spotless General Trading Plc" />
-	<meta property="og:image" content="/favicon.svg" />
-
-	<!-- Twitter Card -->
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Spotless General Trading Plc" />
-	<meta
-		name="twitter:description"
-		content="Reliable trading, property, and facility management services in Ethiopia — delivered with professionalism and care."
-	/>
-	<meta name="twitter:image" content="/favicon.svg" />
 
 	<!-- Favicon -->
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
