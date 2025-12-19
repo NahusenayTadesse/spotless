@@ -158,29 +158,35 @@
 	</DropdownMenu.Root>
 {/snippet}
 
-<nav class="p-12 hidden lg:block absolute top-6 z-50 w-full">
+<nav
+	class="p-12 hidden lg:block fixed top-6 z-50 w-full {scrolled
+		? 'bg-black/50! top-0! *:' + glass
+		: ''}"
+>
 	<div class="flex flex-row gap-8 justify-around items-center">
 		<div class="flex flex-row gap-4 items-center">
 			<img src="/logomain.svg" alt="Logo" />
 
 			<ul class="grid grid-cols-5 gap-2 self-center">
 				{#each menu as { name, href } (href)}
-					<li
+					<a
+						{href}
 						class="{glass} {page.url.pathname === href ? 'bg-white/30' : 'bg-transparent'} {style}"
 					>
-						<a {href}>{name}</a>
-					</li>
+						{name}
+					</a>
 				{/each}
 			</ul>
 		</div>
 		<div class="flex flex-col gap-2">
 			<ul class="grid grid-cols-3 gap-2">
 				{#each faq as { name, href } (href)}
-					<li
+					<a
+						{href}
 						class="{glass} {page.url.pathname === href ? 'bg-white/30' : 'bg-transparent'}  {style}"
 					>
-						<a {href}>{name}</a>
-					</li>
+						{name}
+					</a>
 				{/each}
 				<!-- <DropdownMenu.Root>
 					<DropdownMenu.Trigger
@@ -264,7 +270,7 @@
 						<a
 							{href}
 							title={name}
-							class="text-black transition-transform duration-300 ease-in-out hover:scale-125"
+							class="text-black transition-transform duration-300 ease-in-out hover:scale-125 w-full"
 							{onclick}
 						>
 							{name}

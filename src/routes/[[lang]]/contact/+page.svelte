@@ -13,10 +13,10 @@
 	let Telegram = '/images/Telegram.svg';
 
 	let contacts = [
-		{ icon: Phone, contact: '0988190000 / 0908111213' },
-		{ icon: Mail, contact: 'info@spotlesset.com' },
-		{ icon: Facebook, contact: 'Facebook' },
-		{ icon: Instagram, contact: 'Instagram' }
+		{ icon: Phone, contact: '0988190000 / 0908111213', link: 'tel:0908111213' },
+		{ icon: Mail, contact: 'info@spotlesset.com', link: 'mailto:info@spotlesset.com' },
+		{ icon: Facebook, contact: 'Facebook', link: 'https://www.facebook.com/profile.php?id=61581375164092' },
+		{ icon: Instagram, contact: 'Instagram', link: 'https://familycenter.instagram.com/invite/t/UQ2I-KmV0yLxRanygN30cu8f7EChwVkU1jyys/?preview_type=brand' },
 	];
 
      let { data } = $props()
@@ -152,18 +152,26 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 
 			<div class="flex flex-col gap-2 px-4">
 				{#each contacts as contact}
-					<div class="flex flex-row gap-8 justify-start items-center">
+					<a
+						href={contact.link}
+						target="_blank"
+						class="flex flex-row gap-8 justify-start items-center"
+					>
 						<div class="{glass} rounded-full p-3">
 							<contact.icon class="text-white" />
 						</div>
 						<p class="text-white">{contact.contact}</p>
-					</div>
+					</a>
 				{/each}
 
-				<div class="flex flex-row gap-8 justify-start w-full items-center">
+				<a
+					href="https://t.me/spotless177"
+					targete="_blank"
+					class="flex flex-row gap-8 justify-start w-full items-center"
+				>
 					<img src={Telegram} alt="" class="{glass} w-12 h-12 rounded-full p-3" />
 					<p class="text-white">Telegram</p>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>

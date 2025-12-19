@@ -183,7 +183,7 @@ let servicesAmharic = $state([
 <section class="grid lg:grid-cols-4 grid-cols-1 gap-4 w-9/10 justify-self-center mt-16">
 	{#each services as { title, description, btnNum, butStr, image }, index}
 		<a
-			href={homePage ? '/services/#services' + index : '#services'}
+			href={homePage ? '/services/#services' + index : '#services' + index}
 			onclick={() => (selectedService = index)}
 			class="roudned-xl rounded-4xl
      bg-cover bg-center flex flex-col justify-between items-start p-8 {selectedService === index

@@ -1,7 +1,6 @@
 <script>
 	import { btn, glass } from '$lib/global.svelte';
 	import { Facebook, Instagram, Mail, Phone } from '@lucide/svelte';
-	import { page } from '$app/state';
 
 	let menuEnglish = $state([
 		{ name: 'Home', href: '/' },
@@ -21,9 +20,17 @@
 		{ name: 'አግኙን', href: '/contact' }
 	]);
 
-	let socials = [Phone, Mail, Facebook, Instagram];
+
+
 	let { lang=false } = $props();
     let menu = $derived(lang ? menuAmharic : menuEnglish);
+
+   	let socials = [
+		{ icon: Phone, contact: '0988190000 / 0908111213', link: 'tel:0908111213' },
+		{ icon: Mail, contact: 'info@spotlesset.com', link: 'mailto:info@spotlesset.com' },
+		{ icon: Facebook, contact: 'Facebook', link: 'https://www.facebook.com/profile.php?id=61581375164092' },
+		{ icon: Instagram, contact: 'Instagram', link: 'https://familycenter.instagram.com/invite/t/UQ2I-KmV0yLxRanygN30cu8f7EChwVkU1jyys/?preview_type=brand' },
+	];
 </script>
 
 <footer
@@ -58,10 +65,15 @@
 		</div>
 
 		<div class="flex flex-row flex-wrap items-start gap-3">
-			{#each socials as Social}
-				<div class="p-3 {glass} rounded-full text-white">
-					<Social class="w-5 h-5" />
-				</div>
+			{#each socials as social}
+				<a
+					href={social.link}
+					target="_blank"
+					class="p-3 {glass} rounded-full text-white
+				 hover:scale-105 duration-300 transition-all ease-in-out"
+				>
+					<social.icon class="w-5 h-5" />
+				</a>
 			{/each}
 		</div>
 	</div>

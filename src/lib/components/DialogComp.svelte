@@ -8,7 +8,7 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class="w-auto px-4 border-0"
-		><Button {variant} size="sm" class="border-0">
+		><Button size="sm" class="border-0">
 			{#if variant === 'destructive'}
 				<Trash />
 			{/if}
