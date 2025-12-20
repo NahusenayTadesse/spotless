@@ -17,6 +17,7 @@ export const load: PageServerLoad = async () => {
 		})
 		.from(news)
 		.leftJoin(newsCategories, eq(newsCategories.id, news.category))
+		.where(eq(news.isPublished, true))
 		.orderBy(desc(news.createdAt));
 
 	return {

@@ -203,7 +203,6 @@
 					name: "Don't Publish"
 				}
 			])}
-
 			<Button type="submit" class="mt-4" form="main">
 				{#if $delayed}
 					<Loader class="animate-spin" />

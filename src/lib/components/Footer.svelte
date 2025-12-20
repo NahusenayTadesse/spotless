@@ -75,6 +75,16 @@
 					<social.icon class="w-5 h-5" />
 				</a>
 			{/each}
+
+			<a
+				href="https://t.me/spotless177"
+				target="_blank"
+				class="p-3 {glass} rounded-full text-white
+			 hover:scale-105 duration-300 transition-all ease-in-out"
+				aria-label="telegram"
+			>
+				<img src="/images/Telegram.svg" class="w-5 h-5" alt="telegram" />
+			</a>
 		</div>
 	</div>
 
