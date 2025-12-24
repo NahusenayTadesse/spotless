@@ -34,7 +34,7 @@ let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 </script>
 
 <svelte:head>
-	<title>Contact Us | Spotless</title>
+	<title>{lang ? 'አግኙን' : 'Contact Us'}</title>
 
 	<meta
 		name="description"

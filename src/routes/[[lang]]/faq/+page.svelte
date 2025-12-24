@@ -122,7 +122,7 @@
 </script>
 
 <svelte:head>
-	<title>FAQ | Spotless</title>
+	<title>{lang ? 'የሚጠየቁ ጥያቄዎች' : 'FAQ'}</title>
 	<meta
 		name="description"
 		content="Find answers to frequently asked questions about Spotless General Trading Plc's trading, property, and facility management services in Ethiopia."

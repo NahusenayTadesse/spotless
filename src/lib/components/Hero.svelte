@@ -22,7 +22,7 @@ let lang = $derived( page.params.lang === 'am' || current === 'am');
 
 		<div
 			class="flex flex-row items-center justify-center gap-1 {glass} rounded-2xl p-6 text-center
-     absolute lg:bottom-12 bottom-28 lg:left-12 left-4"
+     absolute lg:bottom-12 bottom-24 lg:left-12 left-4"
 		>
 			<h3 class="text-white font-bold">62+</h3>
 			<h4 class="text-white">{lang ? 'ደንበኞች' : 'Customers'}</h4>

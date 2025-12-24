@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.blog.title}</title>
+	<title>{lang ? data.blogAmharic.title : data.blog.title}</title>
 
 	<!-- Basic SEO -->
 	<title>{data.blog.title}</title>

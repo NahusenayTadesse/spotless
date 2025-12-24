@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>Testimonials | Spotless</title>
+	<title>{lang ? 'ምስክርነቶች' : 'Testimonials'}</title>
 	<meta
 		name="description"
 		content="Read client testimonials about Spotless General Trading Plc and discover why we are trusted for trading, property, and facility management services in Ethiopia."

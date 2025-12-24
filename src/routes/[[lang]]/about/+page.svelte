@@ -89,7 +89,7 @@ let values = $derived(lang ? valuesAmharic : valuesEnglish);
 </script>
 
 <svelte:head>
-	<title>About Us | Spotless</title>
+	<title>{lang ? 'ስለ እኛ' : 'About Us'}</title>
 	<meta
 		name="description"
 		content="Learn about Spotless General Trading Plc — our mission, values, and commitment to delivering reliable trading, property, and facility management services in Ethiopia."

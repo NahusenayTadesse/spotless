@@ -55,7 +55,7 @@
 		class="flex w-full mt-8 pt-8 lg:flex-row flex-col gap-4 lg:justify-between justify-start lg:items-center items-start border-t border-white p-4"
 	>
 		<a href="/" class="hover:scale-105 transition transform duration-300 ease-in-out">
-			<img src="/logomain.svg" alt="logo" />
+			<img src="/logo.webp" alt="logo" class="w-20 h-20" />
 		</a>
 
 		<div class="flex lg:flex-row flex-col justify-start gap-3">

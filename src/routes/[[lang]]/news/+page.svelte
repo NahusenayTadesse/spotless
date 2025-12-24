@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<title>News & Updates | Spotless</title>
+	<title>{lang ? 'ዜና እና ዝመናዎች' : 'News & Updates'}</title>
 
 	<meta
 		name="description"

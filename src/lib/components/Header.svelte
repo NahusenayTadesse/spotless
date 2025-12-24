@@ -159,13 +159,13 @@
 {/snippet}
 
 <nav
-	class="p-12 hidden lg:block fixed top-6 z-50 w-full {scrolled
+	class="p-4 hidden lg:block fixed top-6 z-50 w-full {scrolled
 		? 'bg-black/50! top-0! *:' + glass
 		: ''}"
 >
 	<div class="flex flex-row gap-8 justify-around items-center">
 		<div class="flex flex-row gap-4 items-center">
-			<img src="/logomain.svg" alt="Logo" />
+			<img src="/logo.webp" alt="Logo" class={scrolled ? 'w-20 h-20' : 'w-20 h-20'} />
 
 			<ul class="grid grid-cols-5 gap-2 self-center">
 				{#each menu as { name, href } (href)}
@@ -222,41 +222,16 @@
 		: 'bg-transparent'} space-x-4"
 >
 	<a href="/">
-		<img src="/logomain.svg" alt="Spotless Logo" class="w-37.5 h-15" />
+		<img src={scrolled ? 'logoStroke.webp' : '/logo.webp'} alt="Spotless Logo" class="w-16 h-16" />
 	</a>
-	<!-- <div class="flex flex-row gap-3 relative">
-		<button {onclick} class="text-white">
-			{open}
-			<Menuicon class={scrolled ? 'text-foreground' : 'text-white'} />
-		</button>
-		{#if open}
-			<ul
-				class="flex flex-col w-full absolute top- p-2 right-0
-         z-100! gap-2 {glass} justify-center items-start pl-4 bg-background/20!"
-			>
-				{#each mobileSections as { name, href } (href)}
-					<li transition:slide|global>
-						<a
-							{href}
-							title={name}
-							class="text-white transition-transform duration-300 ease-in-out hover:scale-125"
-							{onclick}
-						>
-							{name}
-						</a>
-					</li>
-				{/each}
-				{@render language()}
-			</ul>
-		{/if}
-	</div> -->
+
 	<Sheet.Root bind:open>
 		<Sheet.Trigger><Menuicon class={scrolled ? 'text-foreground' : 'text-white'} /></Sheet.Trigger>
 		<Sheet.Content side="left" class="bg-white/50! {glass}">
 			<Sheet.Header>
 				<Sheet.Title
 					><a href="/">
-						<img src="/logomain.svg" alt="Spotless Logo" class="w-37.5 h-15" />
+						<img src="/logoStroke.webp" alt="Spotless Logo" class="w-20 h-20" />
 					</a></Sheet.Title
 				>
 			</Sheet.Header>

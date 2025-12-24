@@ -15,8 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Spotless General Trading P.L.C.</title>
-	<title>Spotless General Trading Plc | Trading, Property & Facility Management</title>
+	<title>{lang ? 'ስፖትለስ አጠቃላይ ትሬዲንግ ፒ.ኤል.ሲ.' : 'Spotless General Trading P.L.C.'}</title>
 	<meta
 		name="description"
 		content="Spotless General Trading Plc delivers reliable trading, property, and facility management services in Ethiopia, driven by professionalism, strict supervision, and a client-first approach."

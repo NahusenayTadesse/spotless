@@ -13,7 +13,7 @@ import BottomSnippet from '$lib/components/BottomSnippet.svelte';
 </script>
 
 <svelte:head>
-	<title>Services | Spotless</title>
+	<title>{lang ? 'አገልግሎቶች' : 'Services'}</title>
 	<meta
 		name="description"
 		content="Explore Spotless General Trading Plc's professional trading, property, and facility management services in Ethiopia — tailored to meet your needs with reliability and care."
