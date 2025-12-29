@@ -254,9 +254,9 @@ let values = $derived(lang ? valuesAmharic : valuesEnglish);
 	class="mt-16 grid h-full lg:grid-cols-2 grid-cols-1 w-9/10 gap-16 justify-self-center justify-between items-start"
 >
 	<div class="flex flex-col gap-4 justify-center items-center relative">
-		<img src="/images/about3.webp" alt="" />
+		<img src="/images/about3.webp" alt="" class="rounded-2xl" />
 	</div>
-	<div class="flex flex-col gap-4">
+	<div class="flex flex-col gap-4 lg:pt-12 pt-0">
 		<h3 class="font-bold text-background">{lang ? 'የመሪዎቻችን መልዕክት' : 'Leadership Message'}</h3>
 		<p>
 			{lang

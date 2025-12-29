@@ -106,6 +106,7 @@
 				<Dialog.Trigger class="w-auto px-0">
 					<Card.Root
 						class="
+						h-full
                         w-full max-w-sm
                         transition-all duration-300 ease-in-out
                         hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/20

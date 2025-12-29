@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
      import { Toaster } from "$lib/components/ui/sonner/index.js";
+     import { ProgressBar } from "@prgm/sveltekit-progress-bar";
      import { onMount } from 'svelte';
 
 	import Header from '$lib/components/Header.svelte';
@@ -12,7 +13,7 @@
 		import { toast } from 'svelte-sonner';
 
 
-	import { page, navigating } from '$app/state';
+	import { page } from '$app/state';
 
 	let { children, data } = $props();
 	const flash = getFlash(page, { clearAfterMs: 5000 });
@@ -54,13 +55,14 @@ if (browser) {
    let lang = $derived( page.params.lang === 'am' || data.lang === 'am');
 </script>
 
+<ProgressBar class="text-background" />
 <svelte:head>
 	<!-- Primary Meta -->
 
 	<!-- Favicon -->
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 </svelte:head>
-{#if navigating.to}
+<!-- {#if navigating.to}
 	<div
 		class="fixed z-1 flex flex-col justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 w-auto items-center"
 	>
@@ -71,7 +73,8 @@ if (browser) {
 			</h2>
 		</div>
 	</div>
-{/if}
+{/if} -->
+
 <Toaster richColors closeButton />
 {#if !page.url.pathname.startsWith('/dashboard')}
 	<Header {scrolled} currentLanguage={lang} data={data.lang} />
