@@ -29,15 +29,13 @@ export const btn = `w-fit opacity-100 rounded-2xl gap-[10px] opacity-100 rounded
   import { browser } from '$app/environment';
 
   const COOKIE_KEY = 'app-lang';
-  const DEFAULT    = 'en';
+  const DEFAULT    = 'en' ;
 
   /* 1️⃣  reactive source of truth  */
 
-let lang: string = $state(DEFAULT)
+let lang = $state(DEFAULT)
  if(browser) {
-
-     lang = localStorage.getItem(COOKIE_KEY,);
-
+     lang = localStorage.getItem(COOKIE_KEY);
  }
 export function amh() {
    return lang === 'am'

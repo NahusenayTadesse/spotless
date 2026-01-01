@@ -12,7 +12,6 @@
 		{ name: 'About Us', href: '/about' },
 		{ name: 'Services', href: '/services' },
 		{ name: 'News', href: '/news' },
-		{ name: 'Testimonials', href: '/testimonials' }
 	];
 
 	let menuAmharic = $state([
@@ -20,7 +19,6 @@
 		{ name: 'ስለ እኛ', href: '/about' },
 		{ name: 'አገልግሎቶች', href: '/services' },
 		{ name: 'ዜና', href: '/news' },
-		{ name: 'ምስክርነቶች', href: '/testimonials' },
 	]);
 
 
@@ -39,7 +37,6 @@
 		{ name: 'About Us', href: '/about' },
 		{ name: 'Services', href: '/services' },
 		{ name: 'News', href: '/news' },
-		{ name: 'Testimonials', href: '/testimonials' },
 		{ name: 'FAQ', href: '/faq' },
 		{ name: 'Contact Us', href: '/contact' }
 	];
@@ -49,8 +46,7 @@
 	{ name: 'ስለ እኛ', href: '/about' },
 	   { name: 'አገልግሎቶች', href: '/services' },
 				{ name: 'ዜና', href: '/news' },
-				{ name: 'ምስክርነቶች', href: '/testimonials' },
-				{ name: 'ምስክርነቶች', href: '/testimonials' },
+
 				{ name: 'የሚጠየቁ ጥያቄዎች', href: '/faq' },
 				{ name: 'እኛን አግኙን', href: '/contact' }
 	];

@@ -34,7 +34,7 @@
 	];
 </script>
 
-<Carousel.Root
+<!-- <Carousel.Root
 	opts={{
 		align: 'center'
 	}}
@@ -63,4 +63,4 @@
 
 	<Carousel.Previous />
 	<Carousel.Next />
-</Carousel.Root>
+</Carousel.Root> -->
